@@ -2,7 +2,23 @@ import React from "react";
 import { StyleSheet, View, Button } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import MainActionButton from "./combat-master/src/components/MainActionButton";
 
+class MainCombatActionScreen extends React.Component {
+  static navigationOptions = {
+    title: "Combat"
+  };
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <View>
+        <MainActionButton buttonText="Move" />
+        <MainActionButton buttonText="Action" />
+        <MainActionButton buttonText="Bonus Action" />
+      </View>
+    );
+  }
+}
 class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: "Profile"
@@ -30,7 +46,7 @@ class HomeScreen extends React.Component {
             title="Start Combat"
             color="#434343"
             onPress={() => {
-              alert("Starting combat!");
+              this.props.navigation.navigate("MainCombatAction");
             }}
           />
         </View>
@@ -59,13 +75,17 @@ const styles = StyleSheet.create({
   },
   mainButtonContainer: {
     flex: 1
+  },
+  buttonRow: {
+    margin: 20
   }
 });
 
 const MainNavigator = createStackNavigator(
   {
     Home: { screen: HomeScreen },
-    Profile: { screen: ProfileScreen }
+    Profile: { screen: ProfileScreen },
+    MainCombatAction: { screen: MainCombatActionScreen }
   },
   { initialRouteName: "Home" }
 );
