@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 26637,
+  "expoServerNgrokUrl": "https://jc-j3k.anonymous.combat-master.exp.direct",
+  "packagerNgrokUrl": "https://packager.jc-j3k.anonymous.combat-master.exp.direct",
+  "ngrokPid": 26705,
   "webpackServerPort": null
 }
