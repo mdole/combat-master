@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Button } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 
 interface ActionScreenProps extends NavigationInjectedProps {}
@@ -11,12 +11,18 @@ export class ActionScreen extends React.Component<ActionScreenProps> {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        <Button
-          title="Take action"
-          onPress={() => alert("Taking an action!")}
-        />
-      </View>
+      <ScrollView>
+        <Text>Attack</Text>
+        <Text>Cast spell</Text>
+        <Text>Dash</Text>
+        <Text>Disengage</Text>
+        <Text>Dodge</Text>
+        <Text>Help</Text>
+        <Text>Hide</Text>
+        <Text>Ready</Text>
+        <Text>Search</Text>
+        <Text>Use object</Text>
+      </ScrollView>
     );
   }
 }
