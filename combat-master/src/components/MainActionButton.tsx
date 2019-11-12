@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { View, TouchableHighlight, Text, StyleSheet } from "react-native";
+import { withNavigation, NavigationInjectedProps } from "react-navigation";
 
-interface MainActionButtonProps {
+interface MainActionButtonProps extends NavigationInjectedProps {
   buttonText: string;
+  destination: string;
 }
 
-export default class MainActionButton extends Component<MainActionButtonProps> {
+class MainActionButton extends Component<MainActionButtonProps> {
   render() {
     return (
       <View style={styles.buttonContainer}>
-        <TouchableHighlight onPress={() => alert(this.props.buttonText)}>
+        <TouchableHighlight
+          onPress={() => this.props.navigation.navigate(this.props.destination)}
+        >
           <View style={styles.button}>
             <Text style={styles.buttonText}>{this.props.buttonText}</Text>
           </View>
@@ -18,6 +22,8 @@ export default class MainActionButton extends Component<MainActionButtonProps> {
     );
   }
 }
+
+export default withNavigation(MainActionButton);
 
 const styles = StyleSheet.create({
   buttonContainer: {

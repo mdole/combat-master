@@ -15,9 +15,9 @@ export class MainCombatActionScreen extends React.Component<
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <MainActionButton buttonText="Move" />
-        <MainActionButton buttonText="Action" />
-        <MainActionButton buttonText="Bonus Action" />
+        <MainActionButton buttonText="Move" destination="Move" />
+        <MainActionButton buttonText="Action" destination="Action" />
+        <MainActionButton buttonText="Bonus Action" destination="BonusAction" />
       </View>
     );
   }
