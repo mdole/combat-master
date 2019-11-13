@@ -4347,6 +4347,13 @@ react-native-safe-area-view@^0.14.1:
   dependencies:
     debounce "^1.2.0"
 
+react-native-selectable-grid@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-selectable-grid/-/react-native-selectable-grid-0.3.1.tgz#f0c8a6e1612c93fd82f176be01486e3ebf2628a9"
+  integrity sha512-9HVZwZwQWb4S3HW3fGOusNu1kuVPkzPX4WFNnJ4Oy48t99/o6dzOGjGGwNbtMHeP+OFaOGCP216dkXxKUOC84A==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-view-shot@2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/react-native-view-shot/-/react-native-view-shot-2.6.0.tgz#3b23675826f67658366352c4b97b59a6aded2f43"
