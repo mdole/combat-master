@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Button, TextInput, AsyncStorage } from "react-native";
+import { View, Button, TextInput, AsyncStorage, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 
@@ -11,39 +11,43 @@ interface characterValues {
   level: number;
 }
 
-const getCharacter = async () => {
-  let character;
-  try {
-    character = await AsyncStorage.getItem("@combatMaster_character");
-  } catch (e) {
-    alert(`No luck on that one, here's the error: ${e}`);
-  }
-  console.log(`Got your character, boss. ${character}`);
-  return character;
-};
+export const ProfileScreen: React.FC<ProfileScreenProps> = props => {
+  const { navigate } = props.navigation;
 
-const retreivedCharacter = getCharacter();
-const initialValues = JSON.parse(retreivedCharacter);
-export class ProfileScreen extends React.Component<ProfileScreenProps> {
-  static navigationOptions = {
-    title: "Profile"
+  const initialValues = { name: "Xavier", class: "bard", level: 8 };
+
+  const storeCharacter = async values => {
+    try {
+      await AsyncStorage.setItem(
+        "@combatMaster_character",
+        JSON.stringify(values)
+      );
+    } catch (e) {
+      alert(
+        `oh shoot had some trouble saving that one...here's the error if you're curious ${e}`
+      );
+    }
+    navigate("Home");
   };
-  render() {
-    const { navigate } = this.props.navigation;
-    const storeCharacter = async values => {
-      try {
-        await AsyncStorage.setItem(
-          "@combatMaster_character",
-          JSON.stringify(values)
-        );
-      } catch (e) {
-        alert(
-          `oh shoot had some trouble saving that one...here's the error if you're curious ${e}`
-        );
-      }
-      navigate("Home");
-    };
-    return (
+
+  const getCharacter = async () => {
+    let character;
+    try {
+      character = await AsyncStorage.getItem("@combatMaster_character");
+      console.log(`Got your character, boss. ${character}`);
+      return character;
+    } catch (e) {
+      alert(`No luck on that one, here's the error: ${e}`);
+    }
+    return;
+  };
+
+  return (
+    <View>
+      <Text>
+        Current character values:
+        {JSON.stringify(initialValues)}
+      </Text>
       <Formik initialValues={initialValues} onSubmit={storeCharacter}>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
@@ -65,10 +69,12 @@ export class ProfileScreen extends React.Component<ProfileScreenProps> {
               onBlur={handleBlur("level")}
               values={values.level}
             />
-            <Button title="Submit" onPress={handleSubmit} />
+            <Button title="Submit" onPress={() => handleSubmit} />
           </View>
         )}
       </Formik>
-    );
-  }
-}
+    </View>
+  );
+};
+
+ProfileScreen.navigationOptions = { title: "Profile" };
