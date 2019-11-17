@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, Text, Button } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
-import { NavigationStackOptions } from "react-navigation-stack";
 
 interface ActionScreenProps extends NavigationInjectedProps {}
 
