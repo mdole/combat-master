@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Button } from "react-native";
 import SelectableGrid from "react-native-selectable-grid";
-import { NavigationInjectedProps, ScrollView } from "react-navigation";
+import { NavigationInjectedProps } from "react-navigation";
 
 interface MoveScreenProps extends NavigationInjectedProps {}
 
@@ -89,17 +89,14 @@ const gridData = [
   { label: "" }
 ];
 
-export class MoveScreen extends React.Component<MoveScreenProps> {
-  static navigationOptions = {
-    title: "Move"
-  };
-  render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <ScrollView>
-        <SelectableGrid data={gridData} maxPerRow={9} maxSelect={10} />
-        <Button title="Finished" onPress={() => navigate("MainCombatAction")} />
-      </ScrollView>
-    );
-  }
-}
+export const MoveScreen: React.FC<MoveScreenProps> = props => {
+  const { navigate } = props.navigation;
+  return (
+    <View>
+      <SelectableGrid data={gridData} maxPerRow={9} maxSelect={10} />
+      <Button title="Finished" onPress={() => navigate("MainCombatAction")} />
+    </View>
+  );
+};
+
+MoveScreen.navigationOptions = { title: "Move" };
