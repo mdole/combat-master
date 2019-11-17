@@ -14,13 +14,20 @@ interface characterValues {
 export const ProfileScreen: React.FC<ProfileScreenProps> = props => {
   const { navigate } = props.navigation;
 
-  const initialValues = { name: "Xavier", class: "bard", level: 8 };
+  const initialValues = { name: "Xavier", class: "bard", level: 6 };
 
   const storeCharacter = async values => {
+    console.log("Starting to set your character...");
+    console.log(`Values: ${values}`);
     try {
       await AsyncStorage.setItem(
         "@combatMaster_character",
         JSON.stringify(values)
+      );
+      console.log(
+        `Set that character for you, boss! Here are the values: ${JSON.stringify(
+          values
+        )}`
       );
     } catch (e) {
       alert(
@@ -30,10 +37,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = props => {
     navigate("Home");
   };
 
-  const getCharacter = async () => {
+  const getCharacter = async key => {
     let character;
     try {
-      character = await AsyncStorage.getItem("@combatMaster_character");
+      character = await AsyncStorage.getItem(key);
       console.log(`Got your character, boss. ${character}`);
       return character;
     } catch (e) {
@@ -46,7 +53,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = props => {
     <View>
       <Text>
         Current character values:
-        {JSON.stringify(initialValues)}
+        {JSON.stringify(getCharacter("@combatMaster_character"))}
       </Text>
       <Formik initialValues={initialValues} onSubmit={storeCharacter}>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -69,7 +76,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = props => {
               onBlur={handleBlur("level")}
               values={values.level}
             />
-            <Button title="Submit" onPress={() => handleSubmit} />
+            <Button
+              title="Save and return home"
+              onPress={() => handleSubmit(values)}
+            />
           </View>
         )}
       </Formik>
