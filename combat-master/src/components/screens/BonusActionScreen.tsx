@@ -4,19 +4,18 @@ import { NavigationInjectedProps } from "react-navigation";
 
 interface BonusActionScreenProps extends NavigationInjectedProps {}
 
-export class BonusActionScreen extends React.Component<BonusActionScreenProps> {
-  static navigationOptions = {
-    title: "Action"
-  };
-  render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <View>
-        <Button
-          title="Take action"
-          onPress={() => alert("Taking an action!")}
-        />
-      </View>
-    );
-  }
-}
+export const BonusActionScreen: React.FC<BonusActionScreenProps> = props => {
+  const { navigate } = props.navigation;
+  return (
+    <View>
+      <Button
+        title="Back to main screen"
+        onPress={() => {
+          navigate("MainCombatAction");
+        }}
+      />
+    </View>
+  );
+};
+
+BonusActionScreen.navigationOptions = { title: "Bonus Action" };
