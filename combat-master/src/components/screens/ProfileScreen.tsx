@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Button, TextInput, AsyncStorage, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
@@ -14,9 +14,7 @@ interface characterValues {
 export const ProfileScreen: React.FC<ProfileScreenProps> = props => {
   const { navigate } = props.navigation;
 
-  const initialValues = { name: "Xavier", class: "bard", level: 6 };
-
-  const storeCharacter = async values => {
+  const storeCharacter = async (values: characterValues) => {
     console.log("Starting to set your character...");
     console.log(`Values: ${values}`);
     try {
@@ -49,30 +47,47 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = props => {
     return;
   };
 
+  const [character, setCharacter] = useState();
+
+  useEffect(() => {
+    async function putCharacterInState() {
+      const newCharacter = await getCharacter("@combatMaster_character");
+      setCharacter(newCharacter);
+    }
+    putCharacterInState();
+  });
+
+  const initialValues: characterValues = {
+    name: "Xavier",
+    class: "bard",
+    level: 6
+  };
+
   return (
     <View>
-      <Text>
-        Current character values:
-        {JSON.stringify(getCharacter("@combatMaster_character"))}
-      </Text>
-      <Formik initialValues={initialValues} onSubmit={storeCharacter}>
+      <Text>Current character values: {character}</Text>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={storeCharacter}
+        enableReinitialize
+      >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
             <TextInput
-              placeholder="Character name"
+              placeholder={values.name || "Character name"}
               onChangeText={handleChange("name")}
               onBlur={handleBlur("name")}
               values={values.name}
             />
             <TextInput
-              placeholder="Character class"
+              placeholder={values.class || "Character class"}
               onChangeText={handleChange("class")}
               onBlur={handleBlur("class")}
               values={values.class}
             />
             <TextInput
-              placeholder="Character level"
-              onChangeTest={handleChange("level")}
+              placeholder={values.level.toString() || "Character level"}
+              onChangeText={handleChange("level")}
               onBlur={handleBlur("level")}
               values={values.level}
             />
