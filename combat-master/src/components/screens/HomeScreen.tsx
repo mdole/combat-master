@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Button } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
+import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
 
 interface HomeScreenProps extends NavigationInjectedProps {}
 
@@ -20,7 +21,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = props => {
       <View style={styles.buttonContainer}>
         <Button
           title="Character settings"
-          onPress={() => navigate("Profile", { name: "Xavier" })}
+          onPress={async () => {
+            const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
+            const props: ProfileScreenProps = {
+              currentCharacterValues: character
+            };
+            navigate("Profile", props);
+          }}
         />
       </View>
     </View>

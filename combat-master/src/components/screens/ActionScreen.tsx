@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, Text, Button } from "react-native";
+import { ScrollView, Text, Button, View } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 
 interface ActionScreenProps extends NavigationInjectedProps {}
@@ -8,6 +8,7 @@ export const ActionScreen: React.FC<ActionScreenProps> = props => {
   const { navigate } = props.navigation;
   return (
     <ScrollView>
+      <Button title="Attack" onPress={() => navigate("AttackAction")} />
       <Text>Attack</Text>
       <Text>Cast spell</Text>
       <Text>Dash</Text>
