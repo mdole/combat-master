@@ -86,10 +86,10 @@ const gridData = [
   { label: "" },
   { label: "" },
   { label: "" },
-  { label: "" }
+  { label: "" },
 ];
 
-export const MoveScreen: React.FC<MoveScreenProps> = props => {
+export const MoveScreen: React.FC<MoveScreenProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <View>

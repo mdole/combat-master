@@ -4,7 +4,7 @@ import { NavigationInjectedProps } from "react-navigation";
 
 interface BonusActionScreenProps extends NavigationInjectedProps {}
 
-export const BonusActionScreen: React.FC<BonusActionScreenProps> = props => {
+export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <View>

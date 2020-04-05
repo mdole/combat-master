@@ -25,7 +25,7 @@ const storeCharacter = async (values: CharacterValues) => {
   }
 };
 
-const getStoredCharacter = async key => {
+const getStoredCharacter = async (key: string) => {
   try {
     const character = await AsyncStorage.getItem(key);
     return JSON.parse(character) as CharacterValues;
@@ -41,7 +41,7 @@ const placeholderCharacter: CharacterValues = {
   level: 6
 };
 
-export const getCharacterOrPlaceholder = async key => {
+export const getCharacterOrPlaceholder = async (key: string) => {
   const storedCharacter = await getStoredCharacter(key);
   return storedCharacter || placeholderCharacter;
 };

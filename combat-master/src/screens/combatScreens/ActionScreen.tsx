@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, Text, Button, View } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
+import { Toggle } from "../../components/Toggle";
 
 interface ActionScreenProps extends NavigationInjectedProps {}
 
-export const ActionScreen: React.FC<ActionScreenProps> = props => {
+export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <ScrollView>
-      <Button title="Attack" onPress={() => navigate("AttackAction")} />
-      <Text>Attack</Text>
-      <Text>Cast spell</Text>
+      <Toggle />
       <Text>Dash</Text>
       <Text>Disengage</Text>
       <Text>Dodge</Text>
@@ -19,10 +18,7 @@ export const ActionScreen: React.FC<ActionScreenProps> = props => {
       <Text>Ready</Text>
       <Text>Search</Text>
       <Text>Use object</Text>
-      <Button
-        title="Back to main screen"
-        onPress={() => navigate("MainCombatAction")}
-      />
+      <Button title="Back to main screen" onPress={() => navigate("MainCombatAction")} />
     </ScrollView>
   );
 };

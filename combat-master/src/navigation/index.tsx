@@ -4,8 +4,8 @@ import {
   MainCombatActionScreen,
   ActionScreen,
   BonusActionScreen,
-  MoveScreen
-} from "../components/screens";
+  MoveScreen,
+} from "../screens";
 
 export const Screens = {
   Home: { screen: HomeScreen },
@@ -13,7 +13,7 @@ export const Screens = {
   MainCombatAction: { screen: MainCombatActionScreen },
   Action: { screen: ActionScreen },
   Move: { screen: MoveScreen },
-  BonusAction: { screen: BonusActionScreen }
+  BonusAction: { screen: BonusActionScreen },
 };
 
 export const initialRouteName = "Home";

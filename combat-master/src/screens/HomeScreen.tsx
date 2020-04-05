@@ -5,7 +5,7 @@ import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } fr
 
 interface HomeScreenProps extends NavigationInjectedProps {}
 
-export const HomeScreen: React.FC<HomeScreenProps> = props => {
+export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <View style={styles.container}>
@@ -24,7 +24,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = props => {
           onPress={async () => {
             const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
             const props: ProfileScreenProps = {
-              currentCharacterValues: character
+              currentCharacterValues: character,
             };
             navigate("Profile", props);
           }}
@@ -41,15 +41,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   buttonContainer: {
-    margin: 20
+    margin: 20,
   },
   mainButtonContainer: {
-    flex: 1
+    flex: 1,
   },
   buttonRow: {
-    margin: 20
-  }
+    margin: 20,
+  },
 });
