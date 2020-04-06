@@ -1,14 +1,26 @@
 import React, { useState } from "react";
-import { Button, Text } from "react-native";
+import { Text } from "react-native";
+import styled from "styled-components";
 
-export const Toggle: React.FC = (props) => {
+interface ToggleProps {
+  label: string;
+  bodyText: string;
+}
+
+const Label = styled.Text`
+  font-size: 20;
+  font-weight: bold;
+`;
+
+export const Toggle: React.FC<ToggleProps> = (props: ToggleProps) => {
+  const { label, bodyText } = props;
+
   const [expanded, toggleExpand] = useState(false);
 
-  const checkExpanded = () => {};
   return (
     <>
-      <Button title="Attack" onPress={() => toggleExpand(!expanded)} />
-      {expanded ? <Text>Cast spell</Text> : null}
+      <Label onPress={() => toggleExpand(!expanded)}>{label}</Label>
+      {expanded ? <Text>{bodyText}</Text> : null}
     </>
   );
 };
