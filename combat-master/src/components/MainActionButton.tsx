@@ -7,7 +7,7 @@ interface MainActionButtonProps extends NavigationInjectedProps {
   destination: string;
 }
 
-export const MainActionButton: React.FC<MainActionButtonProps> = props => {
+export const MainActionButton: React.FC<MainActionButtonProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <View style={styles.buttonContainer}>
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: "#000",
     alignItems: "center",
-    margin: 20
+    margin: 20,
   },
   button: {
     backgroundColor: "#000",
     width: 260,
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonText: {
     textAlign: "center",
@@ -37,6 +37,5 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
-    fontFamily: "serif"
-  }
+  },
 });
