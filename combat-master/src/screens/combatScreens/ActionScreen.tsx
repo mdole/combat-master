@@ -13,7 +13,7 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
     <>
       <ScrollView>
         {actions.map((action, index) => {
-          return <Toggle label={action.name} bodyText={action.fullText} key={index} />;
+          return <Toggle label={action.label} bodyText={action.bodyText} key={index} />;
         })}
       </ScrollView>
       {/* displayed information scrollview */}

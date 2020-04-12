@@ -1,99 +1,20 @@
 import React from "react";
 import { View, Button } from "react-native";
-import SelectableGrid from "react-native-selectable-grid";
 import { NavigationInjectedProps } from "react-navigation";
+import { Toggle } from "../../components/Toggle";
+import { movement } from "../../components/movement";
+import { MoveCounter } from '../../components/MoveCounter'
 
 interface MoveScreenProps extends NavigationInjectedProps {}
-
-const gridData = [
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "0" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-  { label: "" },
-];
 
 export const MoveScreen: React.FC<MoveScreenProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <View>
-      <SelectableGrid data={gridData} maxPerRow={9} maxSelect={10} />
+      {movement.map((move, index) => {
+        return <Toggle label={move.label} bodyText={move.bodyText} key={index} />;
+      })}
+      <MoveCounter />
       <Button title="Finished" onPress={() => navigate("MainCombatAction")} />
     </View>
   );

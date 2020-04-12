@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text } from "react-native";
 import styled from "styled-components";
 
-interface ToggleProps {
+export interface ToggleProps {
   label: string;
   bodyText: string;
 }
@@ -10,6 +10,7 @@ interface ToggleProps {
 const Label = styled.Text`
   font-size: 20;
   font-weight: bold;
+  background-color: ${(props) => (props.expanded ? "papayawhip" : "white")};
 `;
 
 export const Toggle: React.FC<ToggleProps> = (props: ToggleProps) => {
@@ -19,7 +20,9 @@ export const Toggle: React.FC<ToggleProps> = (props: ToggleProps) => {
 
   return (
     <>
-      <Label onPress={() => toggleExpand(!expanded)}>{label}</Label>
+      <Label onPress={() => toggleExpand(!expanded)} expanded={expanded}>
+        {label}
+      </Label>
       {expanded ? <Text>{bodyText}</Text> : null}
     </>
   );
