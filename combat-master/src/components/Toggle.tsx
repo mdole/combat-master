@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text } from "react-native";
 import styled from "styled-components";
 
-interface ToggleProps {
+export interface ToggleProps {
   label: string;
   bodyText: string;
 }
