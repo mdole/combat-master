@@ -5,13 +5,14 @@ import { NavigationInjectedProps } from "react-navigation";
 interface MainActionButtonProps extends NavigationInjectedProps {
   buttonText: string;
   destination: string;
+  propsForPassing: { selectedValue: string | number; updateValue: { (valueToUpdate: string | number): void } };
 }
 
 export const MainActionButton: React.FC<MainActionButtonProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <View style={styles.buttonContainer}>
-      <TouchableHighlight onPress={() => navigate(props.destination)}>
+      <TouchableHighlight onPress={() => navigate(props.destination, props.propsForPassing)}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>{props.buttonText}</Text>
         </View>
