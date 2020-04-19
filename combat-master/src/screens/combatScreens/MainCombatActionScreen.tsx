@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { MainActionButton } from "../../components/MainActionButton";
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 
 interface MainCombatActionScreenProps extends NavigationInjectedProps {}
 
 export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (props) => {
   const { navigation } = props;
-  const [selectedMovement, updateSelectedMovement] = useState("");
+  const [selectedMovement, updateSelectedMovement] = useState(0);
   const [selectedAction, updateSelectedAction] = useState("");
 
-  const updateMovement = () => {
-    console.log("hiiiii");
-    // updateSelectedMovement
+  const updateMovement = (valueToUpdate: number) => {
+    updateSelectedMovement(valueToUpdate);
   };
 
   return (

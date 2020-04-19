@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
 
+interface MoveCounterProps {
+  movementInFeet: number;
+  updateMovementInFeet: any;
+}
+
 export const MoveCounter = (props) => {
   const [selectedMoves, updateSelectedMoves] = useState([]);
-  const [movementInFeet, updateMovementInFeet] = useState(0);
+  const { movementInFeet, updateMovementInFeet } = props;
   useEffect(() => {
     let newMovement = 0;
     let alternativeDiagonal = false;

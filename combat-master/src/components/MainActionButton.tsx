@@ -5,7 +5,7 @@ import { NavigationInjectedProps } from "react-navigation";
 interface MainActionButtonProps extends NavigationInjectedProps {
   buttonText: string;
   destination: string;
-  propsForPassing: { selectedValue: string; updateValue: { (): void } };
+  propsForPassing: { selectedValue: string | number; updateValue: { (valueToUpdate: string | number): void } };
 }
 
 export const MainActionButton: React.FC<MainActionButtonProps> = (props) => {
