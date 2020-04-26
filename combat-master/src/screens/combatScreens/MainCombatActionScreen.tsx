@@ -9,9 +9,18 @@ export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (pr
   const { navigation } = props;
   const [selectedMovement, updateSelectedMovement] = useState(0);
   const [selectedAction, updateSelectedAction] = useState("");
+  const [selectedBonusAction, updateSelectedBonusAction] = useState("");
 
   const updateMovement = (valueToUpdate: number) => {
     updateSelectedMovement(valueToUpdate);
+  };
+
+  const updateAction = (valueToUpdate: string) => {
+    updateSelectedAction(valueToUpdate);
+  };
+
+  const updateBonusAction = (valueToUpdate: string) => {
+    updateSelectedBonusAction(valueToUpdate);
   };
 
   return (
@@ -23,9 +32,19 @@ export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (pr
         propsForPassing={{ selectedValue: selectedMovement, updateValue: updateMovement }}
       />
       <Text>{selectedMovement}</Text>
-      <MainActionButton buttonText="Action" destination="Action" navigation={navigation} />
+      <MainActionButton
+        buttonText="Action"
+        destination="Action"
+        navigation={navigation}
+        propsForPassing={{ selectedValue: selectedAction, updateValue: updateAction }}
+      />
       <Text>{selectedAction}</Text>
-      <MainActionButton buttonText="Bonus Action" destination="BonusAction" navigation={navigation} />
+      <MainActionButton
+        buttonText="Bonus Action"
+        destination="BonusAction"
+        navigation={navigation}
+        propsForPassing={{ selectedValue: selectedBonusAction, updateValue: updateBonusAction }}
+      />
     </View>
   );
 };

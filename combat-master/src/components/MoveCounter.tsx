@@ -6,7 +6,7 @@ interface MoveCounterProps {
   updateMovementInFeet: any;
 }
 
-export const MoveCounter = (props) => {
+export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
   const [selectedMoves, updateSelectedMoves] = useState([]);
   const { movementInFeet, updateMovementInFeet } = props;
   useEffect(() => {
