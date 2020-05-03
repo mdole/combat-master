@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { MainActionButton } from "../../components/MainActionButton";
 import { View, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
+import { useSelector } from "react-redux";
 
 interface MainCombatActionScreenProps extends NavigationInjectedProps {}
 
 export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (props) => {
+  const state = useSelector((state) => state);
   const { navigation } = props;
   const [selectedMovement, updateSelectedMovement] = useState(0);
   const [selectedAction, updateSelectedAction] = useState("");
@@ -31,14 +33,14 @@ export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (pr
         navigation={navigation}
         propsForPassing={{ selectedValue: selectedMovement, updateValue: updateMovement }}
       />
-      <Text>{selectedMovement}</Text>
+      <Text>{state.selectedMovement}</Text>
       <MainActionButton
         buttonText="Action"
         destination="Action"
         navigation={navigation}
         propsForPassing={{ selectedValue: selectedAction, updateValue: updateAction }}
       />
-      <Text>{selectedAction}</Text>
+      <Text>{state.selectedAction}</Text>
       <MainActionButton
         buttonText="Bonus Action"
         destination="BonusAction"

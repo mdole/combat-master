@@ -11,12 +11,12 @@ const MainNavigator = createStackNavigator(Screens, {
 
 const AppContainer = createAppContainer(MainNavigator);
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <AppContainer />
-      </Provider>
-    );
-  }
-}
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  );
+};
+
+export default App;
