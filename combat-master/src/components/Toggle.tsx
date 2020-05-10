@@ -5,8 +5,8 @@ import styled from "styled-components";
 export interface ToggleProps {
   label: string;
   bodyText: string;
-  value: string;
-  updateValue: { (valueToUpdate: React.SetStateAction<string>): void };
+  isCurrentlySelectedAction: boolean;
+  updateParentState: { (valueToUpdate: React.SetStateAction<string>): void };
 }
 
 const Label = styled.Text`
@@ -16,24 +16,14 @@ const Label = styled.Text`
 `;
 
 export const Toggle: React.FC<ToggleProps> = (props: ToggleProps) => {
-  const { label, bodyText, value, updateValue } = props;
-  const [expanded, toggleExpand] = useState(false);
-
-  useEffect(() => {
-    value === label ? updateValue(label) : null;
-  }, [value]);
-
-  const updateEverything = () => {
-    toggleExpand(!expanded);
-    updateValue(label);
-  };
+  const { label, bodyText, isCurrentlySelectedAction, updateParentState } = props;
 
   return (
     <>
-      <Label onPress={() => updateEverything()} expanded={expanded}>
+      <Label onPress={() => updateParentState(label)} expanded={isCurrentlySelectedAction}>
         {label}
       </Label>
-      {expanded ? <Text>{bodyText}</Text> : null}
+      {isCurrentlySelectedAction ? <Text>{bodyText}</Text> : null}
     </>
   );
 };

@@ -1,6 +1,4 @@
-import { ToggleProps } from "./Toggle";
-
-export const actions: ToggleProps[] = [
+export const actions = [
   {
     label: "Attack",
     bodyText:
