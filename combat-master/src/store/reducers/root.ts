@@ -2,7 +2,7 @@ import { UPDATE_MOVEMENT, UPDATE_ACTION, UPDATE_BONUS_ACTION } from "../actions/
 
 const initialState = {
   selectedMovement: 0,
-  selectedAction: "",
+  selectedAction: "Attack",
   selectedBonusAction: "",
 };
 

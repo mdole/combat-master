@@ -1,39 +1,42 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ScrollView, Text, Button, View } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Toggle } from "../../components/Toggle";
 import { actions } from "../../components/actions";
+import { updateSelectedAction } from "../../store/actions";
 
 interface ActionScreenProps extends NavigationInjectedProps {}
 
 export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
-  const [selectedAction, updateSelectedAction] = useState("No action selected");
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const [locallySelectedAction, changeLocallySelectedAction] = useState(state.selectedAction);
 
   return (
     <>
       <ScrollView>
         {actions.map((action, index) => {
+          const isCurrentlySelectedAction = action.label === locallySelectedAction;
           return (
             <Toggle
               label={action.label}
               bodyText={action.bodyText}
               key={index}
-              value={selectedAction}
-              updateValue={updateSelectedAction}
+              isCurrentlySelectedAction={isCurrentlySelectedAction}
+              updateParentState={changeLocallySelectedAction}
             />
           );
         })}
         <View>
-          <Text>{selectedAction}</Text>
+          <Text>{locallySelectedAction}</Text>
         </View>
       </ScrollView>
-      {/* displayed information scrollview */}
-      {/* This will live on the bottom */}
       <Button
         title="Confirm action"
         onPress={() => {
-          props.navigation.state.params.updateValue(selectedAction);
+          dispatch(updateSelectedAction(locallySelectedAction));
           navigate("MainCombatAction");
         }}
       />
