@@ -1,14 +1,26 @@
 import React from "react";
-import { StyleSheet, View, Button, ImageBackground, TouchableHighlight, Text } from "react-native";
+import { View, ImageBackground, TouchableHighlight } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
+import styled from "styled-components/native";
 
 interface HomeScreenProps extends NavigationInjectedProps {}
+
+const ButtonContainer = styled.View`
+  margin: 20px;
+  align-items: center;
+`;
+
+const ButtonText = styled.Text`
+  font-family: "Cinzel_700Bold";
+  color: red;
+  font-size: 30;
+`;
 
 export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   const { navigate } = props.navigation;
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1 }}>
       <ImageBackground
         source={{
           uri:
@@ -16,12 +28,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
         }}
         style={{ flex: 1, resizeMode: "cover", justifyContent: "center", width: "100%" }}
       >
-        <View style={styles.buttonContainer}>
+        <ButtonContainer>
           <TouchableHighlight onPress={() => navigate("MainCombatAction")}>
-            <Text style={styles.buttonText}>Start Combat</Text>
+            <ButtonText>Start Combat</ButtonText>
           </TouchableHighlight>
-        </View>
-        <View style={styles.buttonContainer}>
+        </ButtonContainer>
+        <ButtonContainer>
           <TouchableHighlight
             onPress={async () => {
               const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
@@ -31,36 +43,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
               navigate("Profile", props);
             }}
           >
-            <Text style={styles.buttonText}>Character settings</Text>
+            <ButtonText>Character settings</ButtonText>
           </TouchableHighlight>
-        </View>
+        </ButtonContainer>
       </ImageBackground>
     </View>
   );
 };
 
 HomeScreen.navigationOptions = { headerShown: false };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonContainer: {
-    margin: 20,
-    alignItems: "center",
-  },
-  mainButtonContainer: {
-    flex: 1,
-  },
-  buttonText: {
-    color: "red",
-    fontWeight: "bold",
-    fontSize: 40,
-  },
-  buttonRow: {
-    margin: 20,
-  },
-});
