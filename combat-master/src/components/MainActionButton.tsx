@@ -1,11 +1,11 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import styled from "styled-components/native";
 
 interface MainActionButtonProps extends NavigationInjectedProps {
   buttonText: string;
   destination: string;
+  secondaryText?: string;
 }
 
 const LargeButton = styled.TouchableOpacity`
@@ -23,11 +23,17 @@ const ButtonText = styled.Text`
   font-size: 30px;
 `;
 
+const SecondaryText = styled.Text`
+  font-size: 15px;
+  font-family: Lato_300Light;
+`;
+
 export const MainActionButton: React.FC<MainActionButtonProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <LargeButton onPress={() => navigate(props.destination)}>
       <ButtonText>{props.buttonText}</ButtonText>
+      <SecondaryText>{props.secondaryText}</SecondaryText>
     </LargeButton>
   );
 };
