@@ -1,14 +1,26 @@
 import React from "react";
-import { StyleSheet, View, Button, ImageBackground, TouchableHighlight, Text } from "react-native";
+import { View, ImageBackground, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
+import styled from "styled-components/native";
 
 interface HomeScreenProps extends NavigationInjectedProps {}
+
+const ButtonContainer = styled.View`
+  margin: 20px;
+  align-items: center;
+`;
+
+const ButtonText = styled.Text`
+  font-family: "Cinzel_700Bold";
+  color: #a81414;
+  font-size: 30;
+`;
 
 export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   const { navigate } = props.navigation;
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1 }}>
       <ImageBackground
         source={{
           uri:
@@ -16,13 +28,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
         }}
         style={{ flex: 1, resizeMode: "cover", justifyContent: "center", width: "100%" }}
       >
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight onPress={() => navigate("MainCombatAction")}>
-            <Text style={styles.buttonText}>Start Combat</Text>
-          </TouchableHighlight>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableHighlight
+        <ButtonContainer>
+          <TouchableOpacity onPress={() => navigate("MainCombatAction")}>
+            <ButtonText>Start Combat</ButtonText>
+          </TouchableOpacity>
+        </ButtonContainer>
+        <ButtonContainer>
+          <TouchableOpacity
             onPress={async () => {
               const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
               const props: ProfileScreenProps = {
@@ -31,36 +43,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
               navigate("Profile", props);
             }}
           >
-            <Text style={styles.buttonText}>Character settings</Text>
-          </TouchableHighlight>
-        </View>
+            <ButtonText>Character settings</ButtonText>
+          </TouchableOpacity>
+        </ButtonContainer>
       </ImageBackground>
     </View>
   );
 };
 
 HomeScreen.navigationOptions = { headerShown: false };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonContainer: {
-    margin: 20,
-    alignItems: "center",
-  },
-  mainButtonContainer: {
-    flex: 1,
-  },
-  buttonText: {
-    color: "red",
-    fontWeight: "bold",
-    fontSize: 40,
-  },
-  buttonRow: {
-    margin: 20,
-  },
-});
