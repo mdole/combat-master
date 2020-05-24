@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MainActionButton } from "../../components/MainActionButton";
 import { View, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
@@ -11,13 +11,13 @@ export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (pr
   const { navigation } = props;
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <MainActionButton buttonText="Move" destination="Move" navigation={navigation} />
-      <Text>{state.selectedMovement}</Text>
+      {/* <Text>{state.selectedMovement}</Text> */}
       <MainActionButton buttonText="Action" destination="Action" navigation={navigation} />
-      <Text>{state.selectedAction}</Text>
+      {/* <Text>{state.selectedAction}</Text> */}
       <MainActionButton buttonText="Bonus Action" destination="BonusAction" navigation={navigation} />
-      <Text>{state.selectedBonusAction}</Text>
+      {/* <Text>{state.selectedBonusAction}</Text> */}
     </View>
   );
 };

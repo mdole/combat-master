@@ -1,41 +1,33 @@
 import React from "react";
-import { View, TouchableHighlight, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
+import styled from "styled-components/native";
 
 interface MainActionButtonProps extends NavigationInjectedProps {
   buttonText: string;
   destination: string;
 }
 
+const LargeButton = styled.TouchableOpacity`
+  flex: 1;
+  color: black;
+  background-color: rgba(245, 237, 214, 0.5);
+  margin: 5%;
+  margin-bottom: 0%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ButtonText = styled.Text`
+  font-family: Cinzel_400Regular;
+  font-size: 30px;
+`;
+
 export const MainActionButton: React.FC<MainActionButtonProps> = (props) => {
   const { navigate } = props.navigation;
   return (
-    <View style={styles.buttonContainer}>
-      <TouchableHighlight onPress={() => navigate(props.destination)}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>{props.buttonText}</Text>
-        </View>
-      </TouchableHighlight>
-    </View>
+    <LargeButton onPress={() => navigate(props.destination)}>
+      <ButtonText>{props.buttonText}</ButtonText>
+    </LargeButton>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    backgroundColor: "#000",
-    alignItems: "center",
-    margin: 20,
-  },
-  button: {
-    backgroundColor: "#000",
-    width: 260,
-    alignItems: "center",
-  },
-  buttonText: {
-    textAlign: "center",
-    padding: 20,
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
