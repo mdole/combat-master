@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ImageBackground, TouchableHighlight } from "react-native";
+import { View, ImageBackground, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
 import styled from "styled-components/native";
@@ -13,7 +13,7 @@ const ButtonContainer = styled.View`
 
 const ButtonText = styled.Text`
   font-family: "Cinzel_700Bold";
-  color: red;
+  color: #a81414;
   font-size: 30;
 `;
 
@@ -29,12 +29,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
         style={{ flex: 1, resizeMode: "cover", justifyContent: "center", width: "100%" }}
       >
         <ButtonContainer>
-          <TouchableHighlight onPress={() => navigate("MainCombatAction")}>
+          <TouchableOpacity onPress={() => navigate("MainCombatAction")}>
             <ButtonText>Start Combat</ButtonText>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </ButtonContainer>
         <ButtonContainer>
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={async () => {
               const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
               const props: ProfileScreenProps = {
@@ -44,7 +44,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
             }}
           >
             <ButtonText>Character settings</ButtonText>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </ButtonContainer>
       </ImageBackground>
     </View>
