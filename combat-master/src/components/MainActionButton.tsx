@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationInjectedProps } from "react-navigation";
 import styled from "styled-components/native";
+import { CinzelRegular, LatoLight } from "./styledComponents/FontComponents";
 
 interface MainActionButtonProps extends NavigationInjectedProps {
   buttonText: string;
@@ -18,22 +19,12 @@ const LargeButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-const ButtonText = styled.Text`
-  font-family: Cinzel_400Regular;
-  font-size: 30px;
-`;
-
-const SecondaryText = styled.Text`
-  font-size: 15px;
-  font-family: Lato_300Light;
-`;
-
 export const MainActionButton: React.FC<MainActionButtonProps> = (props) => {
   const { navigate } = props.navigation;
   return (
     <LargeButton onPress={() => navigate(props.destination)}>
-      <ButtonText>{props.buttonText}</ButtonText>
-      <SecondaryText>{props.secondaryText}</SecondaryText>
+      <CinzelRegular size="30">{props.buttonText}</CinzelRegular>
+      <LatoLight size="15">{props.secondaryText}</LatoLight>
     </LargeButton>
   );
 };

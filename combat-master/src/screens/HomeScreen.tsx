@@ -3,18 +3,13 @@ import { View, ImageBackground, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
 import styled from "styled-components/native";
+import { CinzelBold } from "../components/styledComponents/FontComponents";
 
 interface HomeScreenProps extends NavigationInjectedProps {}
 
 const ButtonContainer = styled.View`
   margin: 20px;
   align-items: center;
-`;
-
-const ButtonText = styled.Text`
-  font-family: "Cinzel_700Bold";
-  color: #a81414;
-  font-size: 30;
 `;
 
 export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
@@ -30,7 +25,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
       >
         <ButtonContainer>
           <TouchableOpacity onPress={() => navigate("MainCombatAction")}>
-            <ButtonText>Start Combat</ButtonText>
+            <CinzelBold size="30" color="#a81414">
+              Start Combat
+            </CinzelBold>
           </TouchableOpacity>
         </ButtonContainer>
         <ButtonContainer>
@@ -43,7 +40,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
               navigate("Profile", props);
             }}
           >
-            <ButtonText>Character settings</ButtonText>
+            <CinzelBold size="30" color="#a81414">
+              Character Settings
+            </CinzelBold>
           </TouchableOpacity>
         </ButtonContainer>
       </ImageBackground>
