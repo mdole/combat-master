@@ -11,7 +11,7 @@ interface MoveCounterProps {
 }
 
 const MovementButton = styled.TouchableOpacity`
-  background: rgba(86, 204, 242, 0.25);
+  background: ${(props) => (props.color ? props.color : "#fff")};
   border: 1px solid #000000;
   border-radius: 2px;
   width: 170px;
@@ -25,7 +25,7 @@ const ButtonContainer = styled.View`
   justify-content: space-evenly;
 `;
 
-const MovementContainer = styled.View`
+const MovementLog = styled.View`
   background: rgba(245, 237, 214, 0.5);
   align-items: center;
   margin: 20px;
@@ -61,36 +61,36 @@ export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
   return (
     <View>
       <ButtonContainer>
-        <MovementButton onPress={() => dispatch(updateSelectedMoves("diagonal"))}>
+        <MovementButton color="rgba(86, 204, 242, 0.25)" onPress={() => dispatch(updateSelectedMoves("diagonal"))}>
           <CinzelRegular size="20">Diagonal</CinzelRegular>
         </MovementButton>
-        <MovementButton onPress={() => dispatch(updateSelectedMoves("orthogonal"))}>
+        <MovementButton color="rgba(160, 255, 110, 0.25)" onPress={() => dispatch(updateSelectedMoves("orthogonal"))}>
           <CinzelRegular size="20">Orthogonal</CinzelRegular>
         </MovementButton>
       </ButtonContainer>
-      <MovementContainer>
-        <LatoLight size="30">Total movement (feet):</LatoLight>
+      <MovementLog>
+        <LatoLight size="30">Total movement (ft):</LatoLight>
         <LatoLight size="30">{movementInFeet}</LatoLight>
         {state.selectedMoves.map((move: string, index) => (
           <LatoLight size="20" key={index}>
             {move}
           </LatoLight>
         ))}
-      </MovementContainer>
+      </MovementLog>
       <ButtonContainer>
         <MovementButton
           onPress={() => {
             dispatch(undoLastMove());
           }}
         >
-          <CinzelRegular size="20">Undo last move</CinzelRegular>
+          <CinzelRegular size="20">Undo</CinzelRegular>
         </MovementButton>
         <MovementButton
           onPress={() => {
             dispatch(clearMoves());
           }}
         >
-          <CinzelRegular size="20">Clear moves</CinzelRegular>
+          <CinzelRegular size="20">Clear</CinzelRegular>
         </MovementButton>
       </ButtonContainer>
     </View>
