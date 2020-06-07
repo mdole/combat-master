@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, Button, TextInput, AsyncStorage, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateCharacter } from "../store/actions/characterActions";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -35,7 +36,6 @@ const getStoredCharacter = async (key: string) => {
   }
   return;
 };
-
 const placeholderCharacter: CharacterValues = {
   name: "Xavier Xiloscient",
   class: "Bard",
@@ -50,14 +50,14 @@ export const getCharacterOrPlaceholder = async (key: string) => {
 export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const state = useSelector((state) => state.characterReducer);
+  const currentCharacter = state;
+  const dispatch = useDispatch();
 
   const submit = (values: CharacterValues) => {
     storeCharacter(values);
+    dispatch(updateCharacter(values));
     navigate("Home");
   };
-
-  const currentCharacter = props.navigation.getParam("currentCharacterValues");
-  const [character] = useState(currentCharacter);
 
   return (
     <View>

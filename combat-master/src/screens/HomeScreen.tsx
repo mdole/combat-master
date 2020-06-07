@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, ImageBackground, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
@@ -17,6 +17,14 @@ const ButtonContainer = styled.View`
 export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const dispatch = useDispatch();
+  useEffect(() => {
+    async function getCharacter() {
+      const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
+      dispatch(updateCharacter(character));
+    }
+
+    getCharacter();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -36,13 +44,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
         </ButtonContainer>
         <ButtonContainer>
           <TouchableOpacity
-            onPress={async () => {
-              const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
-              dispatch(updateCharacter(character));
-              const props: ProfileScreenProps = {
-                currentCharacterValues: character,
-              };
-              navigate("Profile", props);
+            onPress={() => {
+              navigate("Profile");
             }}
           >
             <CinzelBold size="30" color="#a81414">
