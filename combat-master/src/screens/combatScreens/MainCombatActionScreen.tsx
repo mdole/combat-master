@@ -9,7 +9,6 @@ interface MainCombatActionScreenProps extends NavigationInjectedProps {}
 export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (props) => {
   const state = useSelector((state) => state.actionReducer);
   const { navigation } = props;
-  console.log(useSelector((state) => state.characterReducer));
   return (
     <View style={{ flex: 1 }}>
       <MainActionButton

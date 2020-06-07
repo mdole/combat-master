@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { View, ImageBackground, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
-import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
+import { DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
 import styled from "styled-components/native";
 import { CinzelBold } from "../components/styledComponents/FontComponents";
 import { updateCharacter } from "../store/actions/characterActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 interface HomeScreenProps extends NavigationInjectedProps {}
 
@@ -17,9 +17,11 @@ const ButtonContainer = styled.View`
 export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const dispatch = useDispatch();
+  const state = useSelector((state) => state.characterReducer);
+
   useEffect(() => {
     async function getCharacter() {
-      const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
+      const character = await getCharacterOrPlaceholder(DefaultCharacterKey, state);
       dispatch(updateCharacter(character));
     }
 

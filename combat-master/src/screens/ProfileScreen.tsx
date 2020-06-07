@@ -36,15 +36,10 @@ const getStoredCharacter = async (key: string) => {
   }
   return;
 };
-const placeholderCharacter: CharacterValues = {
-  name: "Xavier Xiloscient",
-  class: "Bard",
-  level: 6,
-};
 
-export const getCharacterOrPlaceholder = async (key: string) => {
+export const getCharacterOrPlaceholder = async (key: string, characterInState: CharacterValues) => {
   const storedCharacter = await getStoredCharacter(key);
-  return storedCharacter || placeholderCharacter;
+  return storedCharacter || characterInState;
 };
 
 export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
@@ -61,7 +56,6 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
 
   return (
     <View>
-      <Text>Current character values: {JSON.stringify(currentCharacter)}</Text>
       <Formik initialValues={currentCharacter} onSubmit={submit} enableReinitialize>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
