@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Button, TextInput, AsyncStorage, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
+import { useSelector } from "react-redux";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -9,7 +10,7 @@ export interface ProfileScreenProps {
 
 type InternalProfileScreenProps = NavigationInjectedProps<ProfileScreenProps>;
 
-interface CharacterValues {
+export interface CharacterValues {
   name: string;
   class: string;
   level: number;
@@ -38,7 +39,7 @@ const getStoredCharacter = async (key: string) => {
 const placeholderCharacter: CharacterValues = {
   name: "Xavier Xiloscient",
   class: "Bard",
-  level: 6
+  level: 6,
 };
 
 export const getCharacterOrPlaceholder = async (key: string) => {
@@ -46,8 +47,9 @@ export const getCharacterOrPlaceholder = async (key: string) => {
   return storedCharacter || placeholderCharacter;
 };
 
-export const ProfileScreen: React.FC<InternalProfileScreenProps> = props => {
+export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   const { navigate } = props.navigation;
+  const state = useSelector((state) => state.characterReducer);
 
   const submit = (values: CharacterValues) => {
     storeCharacter(values);

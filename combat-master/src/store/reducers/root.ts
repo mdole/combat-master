@@ -14,7 +14,7 @@ const initialState = {
   selectedBonusAction: "",
 };
 
-const reducer = (state = initialState, action) => {
+const actionReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_MOVEMENT:
       return {
@@ -51,4 +51,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default actionReducer;

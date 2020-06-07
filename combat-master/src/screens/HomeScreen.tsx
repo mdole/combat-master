@@ -4,6 +4,8 @@ import { NavigationInjectedProps } from "react-navigation";
 import { ProfileScreenProps, DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
 import styled from "styled-components/native";
 import { CinzelBold } from "../components/styledComponents/FontComponents";
+import { updateCharacter } from "../store/actions/characterActions";
+import { useDispatch } from "react-redux";
 
 interface HomeScreenProps extends NavigationInjectedProps {}
 
@@ -14,6 +16,8 @@ const ButtonContainer = styled.View`
 
 export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   const { navigate } = props.navigation;
+  const dispatch = useDispatch();
+
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
@@ -34,6 +38,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
           <TouchableOpacity
             onPress={async () => {
               const character = await getCharacterOrPlaceholder(DefaultCharacterKey);
+              dispatch(updateCharacter(character));
               const props: ProfileScreenProps = {
                 currentCharacterValues: character,
               };
