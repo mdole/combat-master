@@ -1,4 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./reducers/root";
+import actionReducer from "./reducers/root";
+import characterReducer from "./reducers/characterReducer";
 
-export const store = configureStore({ reducer: reducer });
+const reducer = {
+  actionReducer: actionReducer,
+  characterReducer: characterReducer,
+};
+
+export const store = configureStore({ reducer });

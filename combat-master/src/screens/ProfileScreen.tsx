@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, Button, TextInput, AsyncStorage, Text } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
+import { updateCharacter } from "../store/actions/characterActions";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -9,7 +11,7 @@ export interface ProfileScreenProps {
 
 type InternalProfileScreenProps = NavigationInjectedProps<ProfileScreenProps>;
 
-interface CharacterValues {
+export interface CharacterValues {
   name: string;
   class: string;
   level: number;
@@ -35,31 +37,25 @@ const getStoredCharacter = async (key: string) => {
   return;
 };
 
-const placeholderCharacter: CharacterValues = {
-  name: "Xavier Xiloscient",
-  class: "Bard",
-  level: 6
-};
-
-export const getCharacterOrPlaceholder = async (key: string) => {
+export const getCharacterOrPlaceholder = async (key: string, characterInState: CharacterValues) => {
   const storedCharacter = await getStoredCharacter(key);
-  return storedCharacter || placeholderCharacter;
+  return storedCharacter || characterInState;
 };
 
-export const ProfileScreen: React.FC<InternalProfileScreenProps> = props => {
+export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   const { navigate } = props.navigation;
+  const state = useSelector((state) => state.characterReducer);
+  const currentCharacter = state;
+  const dispatch = useDispatch();
 
   const submit = (values: CharacterValues) => {
     storeCharacter(values);
+    dispatch(updateCharacter(values));
     navigate("Home");
   };
 
-  const currentCharacter = props.navigation.getParam("currentCharacterValues");
-  const [character] = useState(currentCharacter);
-
   return (
     <View>
-      <Text>Current character values: {JSON.stringify(currentCharacter)}</Text>
       <Formik initialValues={currentCharacter} onSubmit={submit} enableReinitialize>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>

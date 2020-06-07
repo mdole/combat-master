@@ -11,7 +11,7 @@ interface MoveScreenProps extends NavigationInjectedProps {}
 export const MoveScreen: React.FC<MoveScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.actionReducer);
   const [movementInFeet, updateMovementInFeet] = useState(state.selectedMovement);
 
   return (

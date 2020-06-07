@@ -35,7 +35,7 @@ const MovementLog = styled.View`
 `;
 
 export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.actionReducer);
   const dispatch = useDispatch();
 
   const { movementInFeet, updateMovementInFeet } = props;

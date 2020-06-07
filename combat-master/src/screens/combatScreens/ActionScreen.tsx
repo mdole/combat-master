@@ -11,7 +11,7 @@ interface ActionScreenProps extends NavigationInjectedProps {}
 export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.actionReducer);
   const [locallySelectedAction, changeLocallySelectedAction] = useState(state.selectedAction);
 
   return (

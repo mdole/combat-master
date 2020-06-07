@@ -12,7 +12,7 @@ const StyledTextInput = styled(TextInput)`
 `;
 export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.actionReducer);
 
   const [localBonusAction, updateLocalBonusAction] = React.useState(state.selectedBonusAction);
   const dispatch = useDispatch();

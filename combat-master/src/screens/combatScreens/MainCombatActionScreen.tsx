@@ -7,9 +7,8 @@ import { useSelector } from "react-redux";
 interface MainCombatActionScreenProps extends NavigationInjectedProps {}
 
 export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (props) => {
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.actionReducer);
   const { navigation } = props;
-
   return (
     <View style={{ flex: 1 }}>
       <MainActionButton
