@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Button, TextInput, AsyncStorage, Text } from "react-native";
+import { View, Button, TextInput, AsyncStorage, Text, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCharacter } from "../store/actions/characterActions";
+import { CinzelBold } from "../components/styledComponents/FontComponents";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -77,7 +78,14 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
               onBlur={handleBlur("level")}
               value={values.level.toString()}
             />
-            <Button title="Save and return home" onPress={() => handleSubmit(values)} />
+            <TouchableOpacity
+              onPress={() => {
+                handleSubmit(values);
+              }}
+              style={{ alignItems: "center" }}
+            >
+              <CinzelBold size="35">Finished</CinzelBold>
+            </TouchableOpacity>
           </View>
         )}
       </Formik>

@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 import { CinzelBold } from "../components/styledComponents/FontComponents";
 import { updateCharacter } from "../store/actions/characterActions";
 import { useDispatch, useSelector } from "react-redux";
+import { darkRed } from "../styles/colors";
 
 interface HomeScreenProps extends NavigationInjectedProps {}
 
@@ -39,7 +40,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
       >
         <ButtonContainer>
           <TouchableOpacity onPress={() => navigate("MainCombatAction")}>
-            <CinzelBold size="30" color="#a81414">
+            <CinzelBold size="30" color={darkRed}>
               Start Combat
             </CinzelBold>
           </TouchableOpacity>
@@ -50,7 +51,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
               navigate("Profile");
             }}
           >
-            <CinzelBold size="30" color="#a81414">
+            <CinzelBold size="30" color={darkRed}>
               Character Settings
             </CinzelBold>
           </TouchableOpacity>
