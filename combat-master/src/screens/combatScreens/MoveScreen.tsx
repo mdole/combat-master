@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Button, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { MoveCounter } from "../../components/MoveCounter";
 import { updateSelectedMovement } from "../../store/actions";

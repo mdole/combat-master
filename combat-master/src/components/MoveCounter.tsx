@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateSelectedMoves, clearMoves, undoLastMove } from "../store/actions";
 import styled from "styled-components/native";
 import { CinzelRegular, LatoLight } from "./styledComponents/FontComponents";
+import { parchment, lightBlue, paleGreen } from "../styles/colors";
 
 interface MoveCounterProps {
   movementInFeet: number;
   updateMovementInFeet: any;
 }
 
-const MovementButton = styled.TouchableOpacity`
+const MovementButton = styled.TouchableOpacity<{ color?: string }>`
   background: ${(props) => (props.color ? props.color : "#fff")};
   border: 1px solid #000000;
   border-radius: 2px;
@@ -26,7 +27,7 @@ const ButtonContainer = styled.View`
 `;
 
 const MovementLog = styled.View`
-  background: rgba(245, 237, 214, 0.5);
+  background: ${parchment};
   align-items: center;
   margin: 20px;
   padding: 20px;
@@ -61,10 +62,10 @@ export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
   return (
     <View>
       <ButtonContainer>
-        <MovementButton color="rgba(86, 204, 242, 0.25)" onPress={() => dispatch(updateSelectedMoves("diagonal"))}>
+        <MovementButton color={lightBlue} onPress={() => dispatch(updateSelectedMoves("diagonal"))}>
           <CinzelRegular size="20">Diagonal</CinzelRegular>
         </MovementButton>
-        <MovementButton color="rgba(160, 255, 110, 0.25)" onPress={() => dispatch(updateSelectedMoves("orthogonal"))}>
+        <MovementButton color={paleGreen} onPress={() => dispatch(updateSelectedMoves("orthogonal"))}>
           <CinzelRegular size="20">Orthogonal</CinzelRegular>
         </MovementButton>
       </ButtonContainer>
