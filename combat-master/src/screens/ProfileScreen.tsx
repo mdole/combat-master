@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, AsyncStorage, TouchableOpacity } from "react-native";
+import { View, TextInput, AsyncStorage, TouchableOpacity, Picker } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
@@ -71,6 +71,21 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   const currentCharacter = state;
   const dispatch = useDispatch();
 
+  const classes: string[] = [
+    "Barbarian",
+    "Bard",
+    "Cleric",
+    "Druid",
+    "Fighter",
+    "Monk",
+    "Paladin",
+    "Ranger",
+    "Rogue",
+    "Sorcerer",
+    "Warlock",
+    "Wizard",
+  ];
+
   const submit = (values: CharacterValues) => {
     storeCharacter(values);
     dispatch(updateCharacter(values));
@@ -89,12 +104,6 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                 onBlur={handleBlur("name")}
                 value={values.name}
               />
-              <TextInput
-                placeholder={values.class || "Character class"}
-                onChangeText={handleChange("class")}
-                onBlur={handleBlur("class")}
-                value={values.class}
-              />
               <StyledInput
                 placeholder={values.level.toString() || "Character level"}
                 onChangeText={handleChange("level")}
@@ -102,6 +111,11 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                 value={values.level.toString()}
                 keyboardType={"numeric"}
               />
+              <Picker selectedValue={values.class} onValueChange={handleChange("class")}>
+                {classes.map((className) => {
+                  return <Picker.Item label={className} value={className} key={className} />;
+                })}
+              </Picker>
             </View>
             <TouchableOpacity
               onPress={() => {
