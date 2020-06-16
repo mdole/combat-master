@@ -11,7 +11,7 @@ interface MoveCounterProps {
   updateMovementInFeet: any;
 }
 
-const MovementButton = styled.TouchableOpacity`
+const MovementButton = styled.TouchableOpacity<{ color?: string }>`
   background: ${(props) => (props.color ? props.color : "#fff")};
   border: 1px solid #000000;
   border-radius: 2px;

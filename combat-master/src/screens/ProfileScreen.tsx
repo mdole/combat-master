@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { View, Button, TextInput, AsyncStorage, Text, TouchableOpacity } from "react-native";
+import React from "react";
+import { View, TextInput, AsyncStorage, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCharacter } from "../store/actions/characterActions";
 import { CinzelBold } from "../components/styledComponents/FontComponents";
+import { parchment } from "../styles/colors";
+import styled from "styled-components/native";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -43,6 +45,26 @@ export const getCharacterOrPlaceholder = async (key: string, characterInState: C
   return storedCharacter || characterInState;
 };
 
+const StyledView = styled.View`
+  background-color: ${parchment};
+  width: 90%;
+  height: 90%;
+  margin: 5%;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledInput = styled.TextInput`
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  border: black 1px solid;
+  padding: 20px;
+  margin: 20px;
+  font-size: 20px;
+  font-family: Cinzel_400Regular;
+`;
+
 export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const state = useSelector((state) => state.characterReducer);
@@ -59,25 +81,28 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
     <View>
       <Formik initialValues={currentCharacter} onSubmit={submit} enableReinitialize>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <View>
-            <TextInput
-              placeholder={values.name || "Character name"}
-              onChangeText={handleChange("name")}
-              onBlur={handleBlur("name")}
-              value={values.name}
-            />
-            <TextInput
-              placeholder={values.class || "Character class"}
-              onChangeText={handleChange("class")}
-              onBlur={handleBlur("class")}
-              value={values.class}
-            />
-            <TextInput
-              placeholder={values.level.toString() || "Character level"}
-              onChangeText={handleChange("level")}
-              onBlur={handleBlur("level")}
-              value={values.level.toString()}
-            />
+          <StyledView>
+            <View style={{ width: "100%" }}>
+              <StyledInput
+                placeholder={values.name || "Character name"}
+                onChangeText={handleChange("name")}
+                onBlur={handleBlur("name")}
+                value={values.name}
+              />
+              <TextInput
+                placeholder={values.class || "Character class"}
+                onChangeText={handleChange("class")}
+                onBlur={handleBlur("class")}
+                value={values.class}
+              />
+              <StyledInput
+                placeholder={values.level.toString() || "Character level"}
+                onChangeText={handleChange("level")}
+                onBlur={handleBlur("level")}
+                value={values.level.toString()}
+                keyboardType={"numeric"}
+              />
+            </View>
             <TouchableOpacity
               onPress={() => {
                 handleSubmit(values);
@@ -86,7 +111,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
             >
               <CinzelBold size="35">Finished</CinzelBold>
             </TouchableOpacity>
-          </View>
+          </StyledView>
         )}
       </Formik>
     </View>
