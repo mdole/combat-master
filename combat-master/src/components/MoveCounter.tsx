@@ -80,6 +80,8 @@ export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
           scrollEnabled={scrollEnabled}
           onLayout={(event) => setScrollViewHeight(event.nativeEvent.layout.height)}
           onContentSizeChange={(_width, height) => setContentHeight(height)}
+          contentContainerStyle={{ alignItems: "center" }}
+          style={{ width: "100%" }}
         >
           {state.selectedMoves.map((move: string, index) => (
             <LatoLight size="20" key={index}>
