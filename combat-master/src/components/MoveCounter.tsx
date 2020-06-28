@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { View, Text, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { updateSelectedMoves, clearMoves, undoLastMove } from "../store/actions";
 import styled from "styled-components/native";
@@ -38,6 +38,10 @@ const MovementLog = styled.View`
 export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
   const state = useSelector((state) => state.actionReducer);
   const dispatch = useDispatch();
+  const [contentHeight, setContentHeight] = useState(0);
+  const [scrollViewHeight, setScrollViewHeight] = useState(0);
+
+  const scrollEnabled = contentHeight > scrollViewHeight;
 
   const { movementInFeet, updateMovementInFeet } = props;
 
@@ -72,11 +76,17 @@ export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
       <MovementLog>
         <LatoLight size="30">Total movement (ft):</LatoLight>
         <LatoLight size="30">{movementInFeet}</LatoLight>
-        {state.selectedMoves.map((move: string, index) => (
-          <LatoLight size="20" key={index}>
-            {move}
-          </LatoLight>
-        ))}
+        <ScrollView
+          scrollEnabled={scrollEnabled}
+          onLayout={(event) => setScrollViewHeight(event.nativeEvent.layout.height)}
+          onContentSizeChange={(_width, height) => setContentHeight(height)}
+        >
+          {state.selectedMoves.map((move: string, index) => (
+            <LatoLight size="20" key={index}>
+              {move}
+            </LatoLight>
+          ))}
+        </ScrollView>
       </MovementLog>
       <ButtonContainer>
         <MovementButton
