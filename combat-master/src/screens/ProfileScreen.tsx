@@ -59,6 +59,10 @@ const FormContainer = styled.View`
   margin-top: 20px;
 `;
 
+const Label = styled(LatoLight)`
+  margin-bottom: 5%;
+`;
+
 const StyledInput = styled.TextInput`
   color: #000;
   background-color: #fff;
@@ -103,18 +107,14 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <StyledView>
             <FormContainer>
-              <LatoLight size={"20"} style={{ marginBottom: "5%" }}>
-                Character Name:
-              </LatoLight>
+              <Label size={"20"}>Character Name:</Label>
               <StyledInput
                 placeholder={values.name || "Name"}
                 onChangeText={handleChange("name")}
                 onBlur={handleBlur("name")}
                 value={values.name}
               />
-              <LatoLight size={"20"} style={{ marginBottom: "5%" }}>
-                Character Level:
-              </LatoLight>
+              <Label size={"20"}>Character Level:</Label>
               <StyledInput
                 placeholder={values.level.toString() || "Level"}
                 onChangeText={handleChange("level")}
@@ -122,9 +122,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                 value={values.level.toString()}
                 keyboardType={"numeric"}
               />
-              <LatoLight size={"20"} style={{ marginBottom: "5%" }}>
-                Character Class:
-              </LatoLight>
+              <Label size={"20"}>Character Class:</Label>
               <Picker selectedValue={values.class} onValueChange={handleChange("class")}>
                 {classes.map((className) => {
                   return <Picker.Item label={className} value={className} key={className} />;
