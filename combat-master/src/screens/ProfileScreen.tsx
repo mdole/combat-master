@@ -4,7 +4,7 @@ import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCharacter } from "../store/actions/characterActions";
-import { CinzelBold } from "../components/styledComponents/FontComponents";
+import { CinzelBold, LatoLight } from "../components/styledComponents/FontComponents";
 import { parchment } from "../styles/colors";
 import styled from "styled-components/native";
 
@@ -54,13 +54,18 @@ const StyledView = styled.View`
   justify-content: space-between;
 `;
 
+const FormContainer = styled.View`
+  width: 90%;
+  margin-top: 20px;
+`;
+
 const StyledInput = styled.TextInput`
   color: #000;
   background-color: #fff;
   text-align: center;
   border: black 1px solid;
   padding: 20px;
-  margin: 20px;
+  margin-bottom: 20px;
   font-size: 20px;
   font-family: Cinzel_400Regular;
 `;
@@ -97,26 +102,35 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
       <Formik initialValues={currentCharacter} onSubmit={submit} enableReinitialize>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <StyledView>
-            <View style={{ width: "100%" }}>
+            <FormContainer>
+              <LatoLight size={"20"} style={{ marginBottom: "5%" }}>
+                Character Name:
+              </LatoLight>
               <StyledInput
-                placeholder={values.name || "Character name"}
+                placeholder={values.name || "Name"}
                 onChangeText={handleChange("name")}
                 onBlur={handleBlur("name")}
                 value={values.name}
               />
+              <LatoLight size={"20"} style={{ marginBottom: "5%" }}>
+                Character Level:
+              </LatoLight>
               <StyledInput
-                placeholder={values.level.toString() || "Character level"}
+                placeholder={values.level.toString() || "Level"}
                 onChangeText={handleChange("level")}
                 onBlur={handleBlur("level")}
                 value={values.level.toString()}
                 keyboardType={"numeric"}
               />
+              <LatoLight size={"20"} style={{ marginBottom: "5%" }}>
+                Character Class:
+              </LatoLight>
               <Picker selectedValue={values.class} onValueChange={handleChange("class")}>
                 {classes.map((className) => {
                   return <Picker.Item label={className} value={className} key={className} />;
                 })}
               </Picker>
-            </View>
+            </FormContainer>
             <TouchableOpacity
               onPress={() => {
                 handleSubmit(values);
