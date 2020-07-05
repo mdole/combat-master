@@ -5,6 +5,7 @@ import { NavigationInjectedProps } from "react-navigation";
 import { MoveCounter } from "../../components/MoveCounter";
 import { updateSelectedMovement } from "../../store/actions";
 import { CinzelBold } from "../../components/styledComponents/FontComponents";
+import { FinishedButton } from "../../components/FinishedButton";
 
 interface MoveScreenProps extends NavigationInjectedProps {}
 
@@ -17,15 +18,12 @@ export const MoveScreen: React.FC<MoveScreenProps> = (props) => {
   return (
     <View>
       <MoveCounter movementInFeet={movementInFeet} updateMovementInFeet={updateMovementInFeet} />
-      <TouchableOpacity
+      <FinishedButton
         onPress={() => {
           dispatch(updateSelectedMovement(movementInFeet));
           navigate("MainCombatAction");
         }}
-        style={{ alignItems: "center" }}
-      >
-        <CinzelBold size="35">Finished</CinzelBold>
-      </TouchableOpacity>
+      />
     </View>
   );
 };

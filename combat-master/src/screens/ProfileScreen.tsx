@@ -1,12 +1,13 @@
 import React from "react";
-import { View, TextInput, AsyncStorage, TouchableOpacity, Picker } from "react-native";
+import { View, AsyncStorage, Picker } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCharacter } from "../store/actions/characterActions";
-import { CinzelBold, LatoLight } from "../components/styledComponents/FontComponents";
+import { LatoLight } from "../components/styledComponents/FontComponents";
 import { parchment } from "../styles/colors";
 import styled from "styled-components/native";
+import { FinishedButton } from "../components/FinishedButton";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -129,14 +130,11 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                 })}
               </Picker>
             </FormContainer>
-            <TouchableOpacity
+            <FinishedButton
               onPress={() => {
                 handleSubmit(values);
               }}
-              style={{ alignItems: "center" }}
-            >
-              <CinzelBold size="35">Finished</CinzelBold>
-            </TouchableOpacity>
+            />
           </StyledView>
         )}
       </Formik>
