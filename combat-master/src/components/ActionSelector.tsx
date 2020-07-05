@@ -10,21 +10,26 @@ export interface ActionSelectorProps {
   updateParentState: { (valueToUpdate: React.SetStateAction<string>): void };
 }
 
-const ButtonWrapper = styled.TouchableOpacity<{ selected: boolean }>`
+const ButtonWrapper = styled.TouchableOpacity`
   border: 1px solid #000;
-  align-items: center;
-  background-color: ${(props) => (props.selected ? `${lightBlue}` : "white")};
+  background-color: white;
   border-radius: 2px;
+`;
+
+const Label = styled(CinzelRegular)<{ selected: boolean }>`
+  background-color: ${(props) => (props.selected ? `${lightBlue}` : "white")};
+  width: 100%;
+  text-align: center;
 `;
 
 export const ActionSelector: React.FC<ActionSelectorProps> = (props: ActionSelectorProps) => {
   const { label, isCurrentlySelectedAction, updateParentState } = props;
 
   return (
-    <ButtonWrapper onPress={() => updateParentState(label)} selected={isCurrentlySelectedAction}>
-      <CinzelRegular size="18" style={{ lineHeight: 30 }}>
+    <ButtonWrapper onPress={() => updateParentState(label)}>
+      <Label size="18" style={{ lineHeight: 30 }} selected={isCurrentlySelectedAction}>
         {label}
-      </CinzelRegular>
+      </Label>
     </ButtonWrapper>
   );
 };
