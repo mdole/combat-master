@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ScrollView, Text, Button, View } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
-import { Toggle } from "../../components/Toggle";
+import { ActionSelector } from "../../components/ActionSelector";
 import { actions } from "../../components/actions";
 import { updateSelectedAction } from "../../store/actions";
 
@@ -12,27 +12,27 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const dispatch = useDispatch();
   const state = useSelector((state) => state.actionReducer);
-  const [locallySelectedAction, changeLocallySelectedAction] = useState(state.selectedAction);
+  const [locallySelectedAction, setLocallySelectedAction] = useState(state.selectedAction);
 
   return (
     <>
-      <ScrollView>
+      <View>
         {actions.map((action, index) => {
           const isCurrentlySelectedAction = action.label === locallySelectedAction;
           return (
-            <Toggle
+            <ActionSelector
               label={action.label}
               bodyText={action.bodyText}
               key={index}
               isCurrentlySelectedAction={isCurrentlySelectedAction}
-              updateParentState={changeLocallySelectedAction}
+              updateParentState={setLocallySelectedAction}
             />
           );
         })}
-        <View>
-          <Text>{locallySelectedAction}</Text>
-        </View>
-      </ScrollView>
+        <ScrollView>
+          <Text>{actions.filter((action) => action.label === locallySelectedAction)[0].bodyText}</Text>
+        </ScrollView>
+      </View>
       <Button
         title="Confirm action"
         onPress={() => {
