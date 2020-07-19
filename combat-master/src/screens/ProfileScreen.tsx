@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, AsyncStorage, StyleSheet } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
@@ -20,6 +20,7 @@ export interface CharacterValues {
   name: string;
   class: string;
   level: number;
+  race: string;
 }
 
 export const DefaultCharacterKey = "@combatMaster_character";
@@ -81,22 +82,45 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   const state = useSelector((state) => state.characterReducer);
   const currentCharacter = state;
   const dispatch = useDispatch();
+  const [classes, setClasses] = useState([]);
+  const [races, setRaces] = useState([]);
 
-  // TODO: replace with API
-  const classes: string[] = [
-    "Barbarian",
-    "Bard",
-    "Cleric",
-    "Druid",
-    "Fighter",
-    "Monk",
-    "Paladin",
-    "Ranger",
-    "Rogue",
-    "Sorcerer",
-    "Warlock",
-    "Wizard",
-  ];
+  // Fetch race and class data from external API
+  useEffect(() => {
+    try {
+      //~~CLASSES~~
+      const getClasses = async () => {
+        let response = await fetch("https://www.dnd5eapi.co/api/classes");
+        let json = await response.json();
+        return json;
+      };
+
+      getClasses().then((data) =>
+        setClasses(
+          data.results.map((item) => {
+            return item.name;
+          })
+        )
+      );
+
+      //~~RACES~~
+      const getRaces = async () => {
+        let response = await fetch("https://www.dnd5eapi.co/api/races");
+        let json = await response.json();
+        return json;
+      };
+
+      getRaces().then((data) =>
+        setRaces(
+          data.results.map((item) => {
+            return item.name;
+          })
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const submit = (values: CharacterValues) => {
     storeCharacter(values);
@@ -125,12 +149,25 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                 value={values.level.toString()}
                 keyboardType={"numeric"}
               />
+              <Label size={"20"}>Character Race:</Label>
+              <RNPickerSelect
+                style={pickerSelectStyles}
+                useNativeAndroidPickerStyle={false}
+                value={values.race}
+                onValueChange={handleChange("race")}
+                placeholder={{ label: "Select a race", value: "placeholder" }}
+                items={races.map((raceName) => {
+                  return { label: raceName, value: raceName };
+                })}
+              />
+
               <Label size={"20"}>Character Class:</Label>
               <RNPickerSelect
                 style={pickerSelectStyles}
                 useNativeAndroidPickerStyle={false}
                 value={values.class}
                 onValueChange={handleChange("class")}
+                placeholder={{ label: "Select a class", value: "placeholder" }}
                 items={classes.map((className) => {
                   return { label: className, value: className };
                 })}
