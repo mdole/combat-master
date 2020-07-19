@@ -1,5 +1,5 @@
 import React from "react";
-import { View, AsyncStorage, Picker } from "react-native";
+import { View, AsyncStorage, StyleSheet } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import { LatoLight } from "../components/styledComponents/FontComponents";
 import { parchment } from "../styles/colors";
 import styled from "styled-components/native";
 import { FinishedButton } from "../components/FinishedButton";
+import RNPickerSelect from "react-native-picker-select";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -81,6 +82,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   const currentCharacter = state;
   const dispatch = useDispatch();
 
+  // TODO: replace with API
   const classes: string[] = [
     "Barbarian",
     "Bard",
@@ -124,11 +126,15 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                 keyboardType={"numeric"}
               />
               <Label size={"20"}>Character Class:</Label>
-              <Picker selectedValue={values.class} onValueChange={handleChange("class")}>
-                {classes.map((className) => {
-                  return <Picker.Item label={className} value={className} key={className} />;
+              <RNPickerSelect
+                style={pickerSelectStyles}
+                useNativeAndroidPickerStyle={false}
+                value={values.class}
+                onValueChange={handleChange("class")}
+                items={classes.map((className) => {
+                  return { label: className, value: className };
                 })}
-              </Picker>
+              />
             </FormContainer>
             <FinishedButton
               onPress={() => {
@@ -141,5 +147,30 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
     </View>
   );
 };
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    color: "#000",
+    backgroundColor: "#fff",
+    textAlign: "center",
+    borderColor: "black",
+    borderWidth: 1,
+    padding: 20,
+    marginBottom: 20,
+    fontSize: 20,
+    fontFamily: "Cinzel_400Regular",
+  },
+  inputAndroid: {
+    color: "#000",
+    backgroundColor: "#fff",
+    textAlign: "center",
+    borderColor: "black",
+    borderWidth: 1,
+    padding: 20,
+    marginBottom: 20,
+    fontSize: 20,
+    fontFamily: "Cinzel_400Regular",
+  },
+});
 
 ProfileScreen.navigationOptions = { title: "Profile" };
