@@ -29,9 +29,8 @@ const AddButton = styled.TouchableOpacity`
 `;
 
 export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (props) => {
-  const state = useSelector((state) => state.characterReducer);
+  const character: CharacterValues = useSelector((state) => state.characterReducer);
   const dispatch = useDispatch();
-  const character: CharacterValues = state;
 
   const [actionInput, setActionInput] = useState("");
   const [descriptionInput, setDescriptionInput] = useState("");

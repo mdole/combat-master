@@ -12,9 +12,11 @@ const StyledTextInput = styled(TextInput)`
 `;
 export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
-  const state = useSelector((state) => state.actionReducer);
+  const state = useSelector((state) => state);
+  const actions = state.actionReducer;
+  const character: CharacterValues = state.characterReducer;
 
-  const [localBonusAction, updateLocalBonusAction] = React.useState(state.selectedBonusAction);
+  const [localBonusAction, updateLocalBonusAction] = React.useState(actions.selectedBonusAction);
   const dispatch = useDispatch();
 
   return (
@@ -26,8 +28,11 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
         clearTextOnFocus={true}
         onChangeText={(text) => updateLocalBonusAction(text)}
       >
-        {state.selectedBonusAction}
+        {actions.selectedBonusAction}
       </StyledTextInput>
+      {character.bonusActions.map((action) => {
+        return <Text>{action.title}</Text>;
+      })}
       <Button
         title="Confirm bonus action"
         onPress={() => {
