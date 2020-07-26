@@ -10,6 +10,7 @@ import styled from "styled-components/native";
 import { FinishedButton } from "../components/FinishedButton";
 import RNPickerSelect from "react-native-picker-select";
 import { StyledInput } from "../components/styledComponents/StyledInput";
+import { BonusAction } from ".";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -22,6 +23,7 @@ export interface CharacterValues {
   class: string;
   level: number;
   race: string;
+  bonusActions: BonusAction[];
 }
 
 export const DefaultCharacterKey = "@combatMaster_character";

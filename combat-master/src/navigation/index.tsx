@@ -18,4 +18,4 @@ export const Screens = {
   Profile: { screen: ProfileScreen },
 };
 
-export const initialRouteName = "InputBonusActionsScreen";
+export const initialRouteName = "Home";

@@ -3,13 +3,17 @@ import { View, Text } from "react-native";
 import { StyledInput } from "../components/styledComponents/StyledInput";
 import styled from "styled-components/native";
 import { lightBlue } from "../styles/colors";
+import { useSelector, useDispatch } from "react-redux";
 import { CinzelRegular } from "../components/styledComponents/FontComponents";
+import { FinishedButton } from "../components/FinishedButton";
+import { updateCharacterBonusActions } from "../store/actions/characterActions";
+import { CharacterValues } from "./ProfileScreen";
 
 interface InputBonusActionsScreenProps {
   tktk: string;
 }
 
-interface BonusAction {
+export interface BonusAction {
   title: string;
   description: string;
 }
@@ -25,9 +29,13 @@ const AddButton = styled.TouchableOpacity`
 `;
 
 export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (props) => {
+  const state = useSelector((state) => state.characterReducer);
+  const dispatch = useDispatch();
+  const character: CharacterValues = state;
+
   const [actionInput, setActionInput] = useState("");
   const [descriptionInput, setDescriptionInput] = useState("");
-  const [listOfActions, setListOfActions] = useState<Array<BonusAction>>([]);
+  const [listOfActions, setListOfActions] = useState<Array<BonusAction>>(character.bonusActions);
 
   return (
     <View>
@@ -58,6 +66,7 @@ export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (
       >
         <CinzelRegular size="20">Add Action</CinzelRegular>
       </AddButton>
+      <FinishedButton onPress={() => dispatch(updateCharacterBonusActions(listOfActions))} />
     </View>
   );
 };

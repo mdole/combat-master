@@ -7,3 +7,4 @@ export const CLEAR_MOVES = "CLEAR_MOVES";
 
 /** Character Action Types */
 export const UPDATE_CHARACTER = "UPDATE_CHARACTER";
+export const UPDATE_CHARACTER_BONUS_ACTIONS = "UPDATE_CHARACTER_BONUS_ACTIONS";
