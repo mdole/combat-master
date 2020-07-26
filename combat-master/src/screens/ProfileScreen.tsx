@@ -9,6 +9,7 @@ import { parchment } from "../styles/colors";
 import styled from "styled-components/native";
 import { FinishedButton } from "../components/FinishedButton";
 import RNPickerSelect from "react-native-picker-select";
+import { StyledInput } from "../components/styledComponents/StyledInput";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -64,17 +65,6 @@ const FormContainer = styled.View`
 
 const Label = styled(LatoLight)`
   margin-bottom: 5%;
-`;
-
-const StyledInput = styled.TextInput`
-  color: #000;
-  background-color: #fff;
-  text-align: center;
-  border: black 1px solid;
-  padding: 20px;
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-family: Cinzel_400Regular;
 `;
 
 export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {

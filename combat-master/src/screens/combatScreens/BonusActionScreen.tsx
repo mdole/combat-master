@@ -35,6 +35,12 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
           navigate("MainCombatAction");
         }}
       />
+      <Button
+        title="Enter a new bonus action"
+        onPress={() => {
+          navigate("InputBonusActionsScreen");
+        }}
+      />
     </View>
   );
 };
