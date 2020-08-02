@@ -6,7 +6,7 @@ import { lightBlue } from "../styles/colors";
 import { useSelector, useDispatch } from "react-redux";
 import { CinzelRegular } from "../components/styledComponents/FontComponents";
 import { FinishedButton } from "../components/FinishedButton";
-import { updateCharacterBonusActions } from "../store/actions/characterActions";
+import { updateCharacter } from "../store/actions/characterActions";
 import { CharacterValues, storeCharacter } from "./ProfileScreen";
 
 interface InputBonusActionsScreenProps {
@@ -73,7 +73,7 @@ export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (
         text="Save"
         onPress={() => {
           storeCharacter(characterToStore);
-          dispatch(updateCharacterBonusActions(characterToStore.bonusActions));
+          dispatch(updateCharacter(characterToStore));
         }}
       />
     </View>

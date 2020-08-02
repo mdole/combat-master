@@ -1,4 +1,4 @@
-import { UPDATE_CHARACTER, UPDATE_CHARACTER_BONUS_ACTIONS } from "../actions/actionTypes";
+import { UPDATE_CHARACTER } from "../actions/actionTypes";
 import { CharacterValues } from "../../screens/ProfileScreen";
 
 const initialState: CharacterValues = {
@@ -18,11 +18,7 @@ const characterReducer = (state = initialState, action): CharacterValues => {
         class: action.payload.class,
         level: action.payload.level,
         race: action.payload.race,
-      };
-    case UPDATE_CHARACTER_BONUS_ACTIONS:
-      return {
-        ...state,
-        bonusActions: action.payload,
+        bonusActions: action.payload.bonusActions,
       };
     default:
       return state;
