@@ -166,6 +166,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
               />
             </FormContainer>
             <FinishedButton
+              text="Save"
               onPress={() => {
                 handleSubmit(values);
               }}

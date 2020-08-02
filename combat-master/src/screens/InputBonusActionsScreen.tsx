@@ -70,6 +70,7 @@ export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (
         <CinzelRegular size="20">Add Action</CinzelRegular>
       </AddButton>
       <FinishedButton
+        text="Save"
         onPress={() => {
           storeCharacter(characterToStore);
           dispatch(updateCharacterBonusActions(characterToStore.bonusActions));
