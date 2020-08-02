@@ -26,11 +26,11 @@ export interface CharacterValues {
   bonusActions: BonusAction[];
 }
 
-export const DefaultCharacterKey = "@combatMaster_character";
+const DefaultCharacterKey = "@combatMaster_character";
 
-const storeCharacter = async (values: CharacterValues) => {
+export const storeCharacter = async (values: CharacterValues, characterKey = DefaultCharacterKey) => {
   try {
-    await AsyncStorage.setItem(DefaultCharacterKey, JSON.stringify(values));
+    await AsyncStorage.setItem(characterKey, JSON.stringify(values));
   } catch (e) {
     alert(`oh shoot had some trouble saving that one...here's the error if you're curious ${e}`);
   }
