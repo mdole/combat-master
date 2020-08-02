@@ -74,6 +74,7 @@ export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (
         onPress={() => {
           storeCharacter(characterToStore);
           dispatch(updateCharacter(characterToStore));
+          props.navigation.goBack();
         }}
       />
     </View>

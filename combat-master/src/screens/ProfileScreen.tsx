@@ -36,9 +36,9 @@ export const storeCharacter = async (values: CharacterValues, characterKey = Def
   }
 };
 
-const getStoredCharacter = async (key: string) => {
+const getStoredCharacter = async (characterKey = DefaultCharacterKey) => {
   try {
-    const character = await AsyncStorage.getItem(key);
+    const character = await AsyncStorage.getItem(characterKey);
     return JSON.parse(character) as CharacterValues;
   } catch (e) {
     alert(`No luck on that one, here's the error: ${e}`);
@@ -46,8 +46,11 @@ const getStoredCharacter = async (key: string) => {
   return;
 };
 
-export const getCharacterOrPlaceholder = async (key: string, characterInState: CharacterValues) => {
-  const storedCharacter = await getStoredCharacter(key);
+export const getCharacterOrPlaceholder = async (
+  characterInState: CharacterValues,
+  characterKey = DefaultCharacterKey
+) => {
+  const storedCharacter = await getStoredCharacter(characterKey);
   return storedCharacter || characterInState;
 };
 
