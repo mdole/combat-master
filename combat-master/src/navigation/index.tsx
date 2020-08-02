@@ -1,19 +1,21 @@
 import {
-  HomeScreen,
-  ProfileScreen,
-  MainCombatActionScreen,
   ActionScreen,
   BonusActionScreen,
+  HomeScreen,
+  InputBonusActionsScreen,
+  MainCombatActionScreen,
   MoveScreen,
+  ProfileScreen,
 } from "../screens";
 
 export const Screens = {
-  Home: { screen: HomeScreen },
-  Profile: { screen: ProfileScreen },
-  MainCombatAction: { screen: MainCombatActionScreen },
   Action: { screen: ActionScreen },
-  Move: { screen: MoveScreen },
   BonusAction: { screen: BonusActionScreen },
+  Home: { screen: HomeScreen },
+  InputBonusActionsScreen: { screen: InputBonusActionsScreen },
+  MainCombatAction: { screen: MainCombatActionScreen },
+  Move: { screen: MoveScreen },
+  Profile: { screen: ProfileScreen },
 };
 
 export const initialRouteName = "Home";

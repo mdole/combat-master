@@ -6,9 +6,10 @@ const initialState: CharacterValues = {
   class: "Bard",
   level: 6,
   race: "Elf",
+  bonusActions: [],
 };
 
-const characterReducer = (state = initialState, action) => {
+const characterReducer = (state = initialState, action): CharacterValues => {
   switch (action.type) {
     case UPDATE_CHARACTER:
       return {
@@ -17,6 +18,7 @@ const characterReducer = (state = initialState, action) => {
         class: action.payload.class,
         level: action.payload.level,
         race: action.payload.race,
+        bonusActions: action.payload.bonusActions,
       };
     default:
       return state;

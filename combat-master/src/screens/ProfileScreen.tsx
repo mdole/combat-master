@@ -9,6 +9,8 @@ import { parchment } from "../styles/colors";
 import styled from "styled-components/native";
 import { FinishedButton } from "../components/FinishedButton";
 import RNPickerSelect from "react-native-picker-select";
+import { StyledInput } from "../components/styledComponents/StyledInput";
+import { BonusAction } from ".";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -21,21 +23,22 @@ export interface CharacterValues {
   class: string;
   level: number;
   race: string;
+  bonusActions: BonusAction[];
 }
 
-export const DefaultCharacterKey = "@combatMaster_character";
+const DefaultCharacterKey = "@combatMaster_character";
 
-const storeCharacter = async (values: CharacterValues) => {
+export const storeCharacter = async (values: CharacterValues, characterKey = DefaultCharacterKey) => {
   try {
-    await AsyncStorage.setItem(DefaultCharacterKey, JSON.stringify(values));
+    await AsyncStorage.setItem(characterKey, JSON.stringify(values));
   } catch (e) {
     alert(`oh shoot had some trouble saving that one...here's the error if you're curious ${e}`);
   }
 };
 
-const getStoredCharacter = async (key: string) => {
+const getStoredCharacter = async (characterKey = DefaultCharacterKey) => {
   try {
-    const character = await AsyncStorage.getItem(key);
+    const character = await AsyncStorage.getItem(characterKey);
     return JSON.parse(character) as CharacterValues;
   } catch (e) {
     alert(`No luck on that one, here's the error: ${e}`);
@@ -43,8 +46,11 @@ const getStoredCharacter = async (key: string) => {
   return;
 };
 
-export const getCharacterOrPlaceholder = async (key: string, characterInState: CharacterValues) => {
-  const storedCharacter = await getStoredCharacter(key);
+export const getCharacterOrPlaceholder = async (
+  characterInState: CharacterValues,
+  characterKey = DefaultCharacterKey
+) => {
+  const storedCharacter = await getStoredCharacter(characterKey);
   return storedCharacter || characterInState;
 };
 
@@ -64,17 +70,6 @@ const FormContainer = styled.View`
 
 const Label = styled(LatoLight)`
   margin-bottom: 5%;
-`;
-
-const StyledInput = styled.TextInput`
-  color: #000;
-  background-color: #fff;
-  text-align: center;
-  border: black 1px solid;
-  padding: 20px;
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-family: Cinzel_400Regular;
 `;
 
 export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
@@ -174,6 +169,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
               />
             </FormContainer>
             <FinishedButton
+              text="Save"
               onPress={() => {
                 handleSubmit(values);
               }}

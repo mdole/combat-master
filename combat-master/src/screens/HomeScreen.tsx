@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, ImageBackground, TouchableOpacity } from "react-native";
 import { NavigationInjectedProps } from "react-navigation";
-import { DefaultCharacterKey, getCharacterOrPlaceholder } from "./ProfileScreen";
+import { getCharacterOrPlaceholder } from "./ProfileScreen";
 import styled from "styled-components/native";
 import { CinzelBold } from "../components/styledComponents/FontComponents";
 import { updateCharacter } from "../store/actions/characterActions";
@@ -22,7 +22,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
 
   useEffect(() => {
     async function getCharacter() {
-      const character = await getCharacterOrPlaceholder(DefaultCharacterKey, state);
+      const character = await getCharacterOrPlaceholder(state);
       dispatch(updateCharacter(character));
     }
 
