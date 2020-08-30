@@ -5,12 +5,10 @@ import { NavigationInjectedProps } from "react-navigation";
 import { ActionSelector } from "../../components/ActionSelector";
 import { actions } from "../../components/actions";
 import { updateSelectedAction } from "../../store/actions";
-import { parchment } from "../../styles/colors";
 import styled from "styled-components/native";
 import { FinishedButton } from "../../components/FinishedButton";
 import { LatoLight } from "../../components/styledComponents/FontComponents";
 import { ParchmentBackground } from "../../components/styledComponents/ParchmentBackground";
-import { WhiteBorderBox } from "../../components/styledComponents/WhiteBorderBox";
 
 interface ActionScreenProps extends NavigationInjectedProps {}
 
@@ -29,9 +27,9 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
   `;
 
   const ActionContainer = styled.View`
-    width: 90%;
-    margin-top: 20px;
-    flex: 1;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
   `;
 
   return (
