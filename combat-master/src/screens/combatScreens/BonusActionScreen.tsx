@@ -4,6 +4,7 @@ import { NavigationInjectedProps } from "react-navigation";
 import styled from "styled-components";
 import { updateBonusAction } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
+import { CharacterValues } from "..";
 
 interface BonusActionScreenProps extends NavigationInjectedProps {}
 

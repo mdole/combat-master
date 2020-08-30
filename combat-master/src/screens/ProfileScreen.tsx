@@ -4,17 +4,28 @@ import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCharacter } from "../store/actions/characterActions";
-import { LatoLight } from "../components/styledComponents/FontComponents";
-import { parchment } from "../styles/colors";
+import { LatoLight, CinzelRegular } from "../components/styledComponents/FontComponents";
 import styled from "styled-components/native";
 import { FinishedButton } from "../components/FinishedButton";
 import RNPickerSelect from "react-native-picker-select";
 import { StyledInput } from "../components/styledComponents/StyledInput";
 import { BonusAction } from ".";
+import { ParchmentBackground } from "../components/styledComponents/ParchmentBackground";
+import { lightBlue } from "../styles/colors";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
 }
+
+const AddBonusActionButton = styled.TouchableOpacity`
+  background: ${lightBlue};
+  border: 1px solid #000000;
+  border-radius: 2px;
+  width: 170px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+`;
 
 type InternalProfileScreenProps = NavigationInjectedProps<ProfileScreenProps>;
 
@@ -53,15 +64,6 @@ export const getCharacterOrPlaceholder = async (
   const storedCharacter = await getStoredCharacter(characterKey);
   return storedCharacter || characterInState;
 };
-
-const StyledView = styled.View`
-  background-color: ${parchment};
-  width: 90%;
-  height: 90%;
-  margin: 5%;
-  align-items: center;
-  justify-content: space-between;
-`;
 
 const FormContainer = styled.View`
   width: 90%;
@@ -127,7 +129,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
     <View>
       <Formik initialValues={currentCharacter} onSubmit={submit} enableReinitialize>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <StyledView>
+          <ParchmentBackground>
             <FormContainer>
               <Label size={"20"}>Character Name:</Label>
               <StyledInput
@@ -169,14 +171,22 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
               />
             </FormContainer>
             <FinishedButton
-              text="Save"
+              text="Save & return"
               onPress={() => {
                 handleSubmit(values);
               }}
             />
-          </StyledView>
+          </ParchmentBackground>
         )}
       </Formik>
+      <AddBonusActionButton
+        onPress={() => {
+          navigate("InputBonusActionsScreen");
+        }}
+        style={{ alignSelf: "center", marginBottom: 20, width: "100%" }}
+      >
+        <CinzelRegular size="20">Input bonus actions</CinzelRegular>
+      </AddBonusActionButton>
     </View>
   );
 };
