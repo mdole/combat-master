@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { StyledInput } from "../components/styledComponents/StyledInput";
 import styled from "styled-components/native";
-import { lightBlue } from "../styles/colors";
+import { lightBlue, palePurple } from "../styles/colors";
 import { useSelector, useDispatch } from "react-redux";
 import { CinzelRegular } from "../components/styledComponents/FontComponents";
 import { FinishedButton } from "../components/FinishedButton";
@@ -28,6 +28,16 @@ const AddButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
+const RemoveActionButton = styled.TouchableOpacity`
+  background: ${palePurple};
+  border: 1px solid #000000;
+  border-radius: 2px;
+  width: 170px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (props) => {
   const dispatch = useDispatch();
 
@@ -44,6 +54,18 @@ export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (
           <View key={index}>
             <Text>Action: {action.title}</Text>
             <Text>Description: {action.description}</Text>
+            <RemoveActionButton
+              onPress={() => {
+                const tempBonusActions = [...characterToStore.bonusActions];
+                tempBonusActions.splice(index, 1);
+                setCharacterToStore({
+                  ...characterToStore,
+                  bonusActions: [...tempBonusActions],
+                });
+              }}
+            >
+              <CinzelRegular size="20">Remove action</CinzelRegular>
+            </RemoveActionButton>
           </View>
         );
       })}
