@@ -8,10 +8,7 @@ import { CinzelRegular } from "../components/styledComponents/FontComponents";
 import { FinishedButton } from "../components/FinishedButton";
 import { updateCharacter } from "../store/actions/characterActions";
 import { CharacterValues, storeCharacter } from "./ProfileScreen";
-
-interface InputBonusActionsScreenProps {
-  tktk: string;
-}
+import { NavigationInjectedProps } from "react-navigation";
 
 export interface BonusAction {
   title: string;
@@ -38,7 +35,7 @@ const RemoveActionButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const InputBonusActionsScreen: React.FC<InputBonusActionsScreenProps> = (props) => {
+export const InputBonusActionsScreen: React.FC<NavigationInjectedProps> = (props) => {
   const dispatch = useDispatch();
 
   const [actionInput, setActionInput] = useState("");
