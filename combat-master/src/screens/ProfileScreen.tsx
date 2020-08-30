@@ -11,6 +11,7 @@ import { FinishedButton } from "../components/FinishedButton";
 import RNPickerSelect from "react-native-picker-select";
 import { StyledInput } from "../components/styledComponents/StyledInput";
 import { BonusAction } from ".";
+import { ParchmentBackground } from "../components/styledComponents/ParchmentBackground";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -53,15 +54,6 @@ export const getCharacterOrPlaceholder = async (
   const storedCharacter = await getStoredCharacter(characterKey);
   return storedCharacter || characterInState;
 };
-
-const StyledView = styled.View`
-  background-color: ${parchment};
-  width: 90%;
-  height: 90%;
-  margin: 5%;
-  align-items: center;
-  justify-content: space-between;
-`;
 
 const FormContainer = styled.View`
   width: 90%;
@@ -127,7 +119,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
     <View>
       <Formik initialValues={currentCharacter} onSubmit={submit} enableReinitialize>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <StyledView>
+          <ParchmentBackground>
             <FormContainer>
               <Label size={"20"}>Character Name:</Label>
               <StyledInput
@@ -174,7 +166,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                 handleSubmit(values);
               }}
             />
-          </StyledView>
+          </ParchmentBackground>
         )}
       </Formik>
     </View>

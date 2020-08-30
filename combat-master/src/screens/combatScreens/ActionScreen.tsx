@@ -9,6 +9,8 @@ import { parchment } from "../../styles/colors";
 import styled from "styled-components/native";
 import { FinishedButton } from "../../components/FinishedButton";
 import { LatoLight } from "../../components/styledComponents/FontComponents";
+import { ParchmentBackground } from "../../components/styledComponents/ParchmentBackground";
+import { WhiteBorderBox } from "../../components/styledComponents/WhiteBorderBox";
 
 interface ActionScreenProps extends NavigationInjectedProps {}
 
@@ -18,21 +20,6 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
   const state = useSelector((state) => state.actionReducer);
   const [locallySelectedAction, setLocallySelectedAction] = useState(state.selectedAction);
 
-  const StyledView = styled.View`
-    background-color: ${parchment};
-    width: 90%;
-    height: 90%;
-    margin: 5%;
-    align-items: center;
-    justify-content: space-between;
-  `;
-
-  const SelectionContainer = styled.View`
-    width: 90%;
-    margin-top: 20px;
-    flex: 1;
-  `;
-
   const ActionDescription = styled.ScrollView`
     border: solid 1px #000;
     padding: 5px;
@@ -41,9 +28,15 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
     background-color: white;
   `;
 
+  const ActionContainer = styled.View`
+    width: 90%;
+    margin-top: 20px;
+    flex: 1;
+  `;
+
   return (
-    <StyledView>
-      <SelectionContainer>
+    <ParchmentBackground>
+      <ActionContainer>
         <View style={{ flex: 5, justifyContent: "space-between" }}>
           {actions.map((action, index) => {
             const isCurrentlySelectedAction = action.label === locallySelectedAction;
@@ -71,8 +64,8 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
             }}
           />
         </View>
-      </SelectionContainer>
-    </StyledView>
+      </ActionContainer>
+    </ParchmentBackground>
   );
 };
 
