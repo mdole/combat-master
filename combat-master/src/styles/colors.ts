@@ -1,4 +1,4 @@
-export const parchment = "rgba(245, 237, 214, 0.5)";
+export const parchment = "#EFEBE0";
 export const paleGreen = "rgba(160, 255, 110, 0.25)";
 export const lightBlue = "rgba(86, 204, 242, 0.25)";
 export const palePurple = "rgba(187, 107, 217, 0.25)";
