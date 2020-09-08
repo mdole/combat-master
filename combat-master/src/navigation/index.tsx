@@ -17,7 +17,12 @@ export const ScreenStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="Home"
-      screenOptions={{ headerTintColor: "black", headerStyle: { backgroundColor: parchment } }}
+      screenOptions={{
+        headerTintColor: "black",
+        headerStyle: { backgroundColor: parchment },
+        headerTitleStyle: { fontFamily: "Lato_300Light" },
+        headerBackTitleVisible: false,
+      }}
     >
       <Stack.Screen name="Action" component={ActionScreen} options={{ title: "Action" }} />
       <Stack.Screen name="BonusAction" component={BonusActionScreen} options={{ title: "Bonus action" }} />
