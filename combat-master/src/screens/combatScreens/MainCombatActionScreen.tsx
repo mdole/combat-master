@@ -1,10 +1,9 @@
 import React from "react";
 import { MainActionButton } from "../../components/MainActionButton";
 import { View } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
 import { useSelector } from "react-redux";
 
-interface MainCombatActionScreenProps extends NavigationInjectedProps {}
+interface MainCombatActionScreenProps {}
 
 export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (props) => {
   const state = useSelector((state) => state.actionReducer);
@@ -32,5 +31,3 @@ export const MainCombatActionScreen: React.FC<MainCombatActionScreenProps> = (pr
     </View>
   );
 };
-
-MainCombatActionScreen.navigationOptions = { title: "Combat" };

@@ -8,7 +8,6 @@ import { CinzelRegular, CinzelBold, LatoLight } from "../components/styledCompon
 import { FinishedButton } from "../components/FinishedButton";
 import { updateCharacter } from "../store/actions/characterActions";
 import { CharacterValues, storeCharacter } from "./ProfileScreen";
-import { NavigationInjectedProps } from "react-navigation";
 import { ParchmentBackground } from "../components/styledComponents/ParchmentBackground";
 
 export interface BonusAction {
@@ -34,7 +33,7 @@ const BonusActionList = styled.ScrollView`
   background-color: white;
 `;
 
-export const InputBonusActionsScreen: React.FC<NavigationInjectedProps> = (props) => {
+export const InputBonusActionsScreen: React.FC = (props) => {
   const dispatch = useDispatch();
 
   const [actionInput, setActionInput] = useState("");

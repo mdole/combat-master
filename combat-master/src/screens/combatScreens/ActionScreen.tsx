@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
 import { ActionSelector } from "../../components/ActionSelector";
 import { actions } from "../../components/actions";
 import { updateSelectedAction } from "../../store/actions";
@@ -10,7 +9,7 @@ import { FinishedButton } from "../../components/FinishedButton";
 import { LatoLight } from "../../components/styledComponents/FontComponents";
 import { ParchmentBackground } from "../../components/styledComponents/ParchmentBackground";
 
-interface ActionScreenProps extends NavigationInjectedProps {}
+interface ActionScreenProps {}
 
 export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
@@ -66,5 +65,3 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
     </ParchmentBackground>
   );
 };
-
-ActionScreen.navigationOptions = { title: "Action" };

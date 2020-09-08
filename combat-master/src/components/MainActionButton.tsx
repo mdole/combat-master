@@ -1,10 +1,9 @@
 import React from "react";
-import { NavigationInjectedProps } from "react-navigation";
 import styled from "styled-components/native";
 import { CinzelRegular, LatoLight } from "./styledComponents/FontComponents";
 import { parchment } from "../styles/colors";
 
-interface MainActionButtonProps extends NavigationInjectedProps {
+interface MainActionButtonProps {
   buttonText: string;
   destination: string;
   secondaryText?: string;

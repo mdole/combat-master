@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { View, ImageBackground, TouchableOpacity } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
 import { getCharacterOrPlaceholder } from "./ProfileScreen";
 import styled from "styled-components/native";
 import { CinzelBold } from "../components/styledComponents/FontComponents";
@@ -8,7 +7,7 @@ import { updateCharacter } from "../store/actions/characterActions";
 import { useDispatch, useSelector } from "react-redux";
 import { darkRed } from "../styles/colors";
 
-interface HomeScreenProps extends NavigationInjectedProps {}
+interface HomeScreenProps {}
 
 const ButtonContainer = styled.View`
   margin: 20px;
@@ -60,5 +59,3 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
     </View>
   );
 };
-
-HomeScreen.navigationOptions = { headerShown: false };

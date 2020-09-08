@@ -23,7 +23,7 @@ export const ScreenStack = () => {
       <Stack.Screen name="BonusAction" component={BonusActionScreen} options={{ title: "Bonus action" }} />
       <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen
-        name="InputBonusActions"
+        name="InputBonusActionsScreen"
         component={InputBonusActionsScreen}
         options={{ title: "Input bonus actions" }}
       />

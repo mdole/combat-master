@@ -1,12 +1,11 @@
 import React from "react";
 import { View, Button, Text, TextInput } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
 import styled from "styled-components";
 import { updateBonusAction } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { CharacterValues } from "..";
 
-interface BonusActionScreenProps extends NavigationInjectedProps {}
+interface BonusActionScreenProps {}
 
 const StyledTextInput = styled(TextInput)`
   border: 1px black;
@@ -56,5 +55,3 @@ const bonusActionDescription = `Various class features, spells, and other abilit
 You can take only one bonus action on your turn, so you must choose which bonus action to use when you have more than one available.
 
 You choose when to take a bonus action during your turn, unless the bonus action's timing is specified, and anything that deprives you of your ability to take actions also prevents you from taking a bonus action.`;
-
-BonusActionScreen.navigationOptions = { title: "Bonus Action" };

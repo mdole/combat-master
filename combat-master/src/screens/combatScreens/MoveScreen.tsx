@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
 import { MoveCounter } from "../../components/MoveCounter";
 import { updateSelectedMovement } from "../../store/actions";
 import { FinishedButton } from "../../components/FinishedButton";
 
-interface MoveScreenProps extends NavigationInjectedProps {}
+interface MoveScreenProps {}
 
 export const MoveScreen: React.FC<MoveScreenProps> = (props) => {
   const { navigate } = props.navigation;
@@ -26,5 +25,3 @@ export const MoveScreen: React.FC<MoveScreenProps> = (props) => {
     </View>
   );
 };
-
-MoveScreen.navigationOptions = { title: "Move" };
