@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { View, AsyncStorage, StyleSheet } from "react-native";
-import { NavigationInjectedProps } from "react-navigation";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCharacter } from "../store/actions/characterActions";
@@ -27,7 +26,7 @@ const AddBonusActionButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-type InternalProfileScreenProps = NavigationInjectedProps<ProfileScreenProps>;
+type InternalProfileScreenProps = ProfileScreenProps;
 
 export interface CharacterValues {
   name: string;
@@ -215,5 +214,3 @@ const pickerSelectStyles = StyleSheet.create({
     fontFamily: "Cinzel_400Regular",
   },
 });
-
-ProfileScreen.navigationOptions = { title: "Profile" };
