@@ -14,11 +14,11 @@ const ButtonWrapper = styled.TouchableOpacity`
   border: 1px solid #000;
   background-color: white;
   border-radius: 2px;
+  margin-bottom: 10px;
 `;
 
 const Label = styled(CinzelRegular)<{ selected: boolean }>`
   background-color: ${(props) => (props.selected ? `${lightBlue}` : "white")};
-  width: 100%;
   text-align: center;
 `;
 

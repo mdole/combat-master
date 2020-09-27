@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, AsyncStorage, StyleSheet } from "react-native";
+import { AsyncStorage, StyleSheet, ScrollView } from "react-native";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCharacter } from "../store/actions/characterActions";
@@ -125,10 +125,10 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   };
 
   return (
-    <View>
+    <ScrollView>
       <Formik initialValues={currentCharacter} onSubmit={submit} enableReinitialize>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <ParchmentBackground>
+          <ParchmentBackground style={{ alignItems: "center" }}>
             <FormContainer>
               <Label size={"20"}>Character Name:</Label>
               <StyledInput
@@ -168,6 +168,14 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                   return { label: className, value: className };
                 })}
               />
+              <AddBonusActionButton
+                onPress={() => {
+                  navigate("InputBonusActionsScreen");
+                }}
+                style={{ alignSelf: "center", marginBottom: 20, width: "100%" }}
+              >
+                <CinzelRegular size="20">Input bonus actions</CinzelRegular>
+              </AddBonusActionButton>
             </FormContainer>
             <FinishedButton
               text="Save & return"
@@ -178,15 +186,7 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
           </ParchmentBackground>
         )}
       </Formik>
-      <AddBonusActionButton
-        onPress={() => {
-          navigate("InputBonusActionsScreen");
-        }}
-        style={{ alignSelf: "center", marginBottom: 20, width: "100%" }}
-      >
-        <CinzelRegular size="20">Input bonus actions</CinzelRegular>
-      </AddBonusActionButton>
-    </View>
+    </ScrollView>
   );
 };
 
