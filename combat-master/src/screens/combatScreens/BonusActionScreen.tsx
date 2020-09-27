@@ -30,9 +30,10 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
       >
         {actions.selectedBonusAction}
       </StyledTextInput>
-      {character.bonusActions.map((action, index) => {
-        return <Text key={index}>{action.title}</Text>;
-      })}
+      {character.bonusActions &&
+        character.bonusActions.map((action, index) => {
+          return <Text key={index}>{action.title}</Text>;
+        })}
       <Button
         title="Confirm bonus action"
         onPress={() => {

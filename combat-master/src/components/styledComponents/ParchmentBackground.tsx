@@ -4,6 +4,4 @@ import { parchment } from "../../styles/colors";
 export const ParchmentBackground = styled.View`
   background-color: ${parchment};
   padding-bottom: 40px;
-  align-items: center;
-  justify-content: space-between;
 `;

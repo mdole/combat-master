@@ -47,32 +47,33 @@ export const InputBonusActionsScreen: React.FC = (props) => {
       <View style={{ width: "100%", height: "100%" }}>
         <View style={{ margin: 10, height: "100%" }}>
           <BonusActionList>
-            {characterToStore.bonusActions.map((action, index) => {
-              return (
-                <View key={index} style={{ marginBottom: 15 }}>
-                  <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                    <CinzelBold size="24">{action.title}</CinzelBold>
-                    <CinzelBold
-                      size="24"
-                      color={darkRed}
-                      onPress={() => {
-                        const tempBonusActions = [...characterToStore.bonusActions];
-                        tempBonusActions.splice(index, 1);
-                        setCharacterToStore({
-                          ...characterToStore,
-                          bonusActions: [...tempBonusActions],
-                        });
-                      }}
-                    >
-                      X
-                    </CinzelBold>
+            {characterToStore.bonusActions &&
+              characterToStore.bonusActions.map((action, index) => {
+                return (
+                  <View key={index} style={{ marginBottom: 15 }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                      <CinzelBold size="24">{action.title}</CinzelBold>
+                      <CinzelBold
+                        size="24"
+                        color={darkRed}
+                        onPress={() => {
+                          const tempBonusActions = [...characterToStore.bonusActions];
+                          tempBonusActions.splice(index, 1);
+                          setCharacterToStore({
+                            ...characterToStore,
+                            bonusActions: [...tempBonusActions],
+                          });
+                        }}
+                      >
+                        X
+                      </CinzelBold>
+                    </View>
+                    <LatoLight size="14" numberOfLines={2}>
+                      {action.description}
+                    </LatoLight>
                   </View>
-                  <LatoLight size="14" numberOfLines={2}>
-                    {action.description}
-                  </LatoLight>
-                </View>
-              );
-            })}
+                );
+              })}
           </BonusActionList>
 
           <LatoLight size="14" style={{ marginBottom: 10, alignSelf: "flex-start" }}>
