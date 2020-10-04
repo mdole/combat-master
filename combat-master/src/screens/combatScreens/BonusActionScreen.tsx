@@ -6,7 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { CharacterValues } from "..";
 import { FinishedButton } from "../../components/FinishedButton";
 import { AddBonusActionButton } from "../../components/AddBonusActionButton";
-import { CinzelRegular } from "../../components/styledComponents/FontComponents";
+import { CinzelRegular, LatoLight } from "../../components/styledComponents/FontComponents";
+import { ActionSelector } from "../../components/ActionSelector";
+import { ActionDescription } from "./ActionScreen";
 
 interface BonusActionScreenProps {}
 
@@ -23,8 +25,22 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
     <View>
       {character.bonusActions &&
         character.bonusActions.map((action, index) => {
-          return <Text key={index}>{action.title}</Text>;
+          const isCurrentlySelectedAction = action.title === localBonusAction;
+          return (
+            <ActionSelector
+              bodyText={action.description}
+              isCurrentlySelectedAction={isCurrentlySelectedAction}
+              updateParentState={updateLocalBonusAction}
+              label={action.title}
+              key={index}
+            />
+          );
         })}
+      <ActionDescription>
+        <LatoLight size="14px">
+          {character.bonusActions.filter((bonusAction) => bonusAction.title === localBonusAction)[0]?.description}
+        </LatoLight>
+      </ActionDescription>
       <AddBonusActionButton
         onPress={() => {
           navigate("InputBonusActionsScreen");
