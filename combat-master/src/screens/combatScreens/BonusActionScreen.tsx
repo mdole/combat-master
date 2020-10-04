@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Button, Text, TextInput } from "react-native";
 import styled from "styled-components";
 import { updateBonusAction } from "../../store/actions";
@@ -20,6 +20,10 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
 
   const [localBonusAction, updateLocalBonusAction] = React.useState(actions.selectedBonusAction);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    updateLocalBonusAction(actions.selectedBonusAction);
+  }, [actions.selectedBonusAction]);
 
   return (
     <View>
