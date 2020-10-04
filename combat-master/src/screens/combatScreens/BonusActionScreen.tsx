@@ -1,15 +1,17 @@
-import React from "react";
-import { View, Button, Text, TextInput } from "react-native";
-import styled from "styled-components";
+import React, { useEffect } from "react";
+import { View } from "react-native";
 import { updateBonusAction } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { CharacterValues } from "..";
+import { FinishedButton } from "../../components/FinishedButton";
+import { AddBonusActionButton } from "../../components/AddBonusActionButton";
+import { CinzelRegular, LatoLight } from "../../components/styledComponents/FontComponents";
+import { ActionSelector } from "../../components/ActionSelector";
+import { ActionDescription, ActionContainer } from "./ActionScreen";
+import { ParchmentBackground } from "../../components/styledComponents/ParchmentBackground";
 
 interface BonusActionScreenProps {}
 
-const StyledTextInput = styled(TextInput)`
-  border: 1px black;
-`;
 export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const state = useSelector((state) => state);
@@ -19,35 +21,52 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   const [localBonusAction, updateLocalBonusAction] = React.useState(actions.selectedBonusAction);
   const dispatch = useDispatch();
 
-  return (
-    <View>
-      <Text>{bonusActionDescription}</Text>
+  useEffect(() => {
+    updateLocalBonusAction(actions.selectedBonusAction);
+  }, [actions.selectedBonusAction]);
 
-      <StyledTextInput
-        placeholder="Input a bonus action you plan to take"
-        clearTextOnFocus={true}
-        onChangeText={(text) => updateLocalBonusAction(text)}
-      >
-        {actions.selectedBonusAction}
-      </StyledTextInput>
-      {character.bonusActions &&
-        character.bonusActions.map((action, index) => {
-          return <Text key={index}>{action.title}</Text>;
-        })}
-      <Button
-        title="Confirm bonus action"
-        onPress={() => {
-          dispatch(updateBonusAction(localBonusAction));
-          navigate("MainCombatAction");
-        }}
-      />
-      <Button
-        title="Enter a new bonus action"
-        onPress={() => {
-          navigate("InputBonusActionsScreen");
-        }}
-      />
-    </View>
+  return (
+    <ParchmentBackground style={{ flex: 1 }}>
+      <ActionContainer>
+        <LatoLight size="14" style={{ marginBottom: 20 }}>
+          {bonusActionDescription}
+        </LatoLight>
+        <View style={{ flex: 3, justifyContent: "space-between" }}>
+          {character.bonusActions &&
+            character.bonusActions.map((action, index) => {
+              const isCurrentlySelectedAction = action.title === localBonusAction;
+              return (
+                <ActionSelector
+                  bodyText={action.description}
+                  isCurrentlySelectedAction={isCurrentlySelectedAction}
+                  updateParentState={updateLocalBonusAction}
+                  label={action.title}
+                  key={index}
+                />
+              );
+            })}
+          <ActionDescription>
+            <LatoLight size="14px">
+              {character.bonusActions.filter((bonusAction) => bonusAction.title === localBonusAction)[0]?.description}
+            </LatoLight>
+          </ActionDescription>
+          <AddBonusActionButton
+            onPress={() => {
+              navigate("InputBonusActionsScreen");
+            }}
+            style={{ alignSelf: "center", marginVertical: 20, width: "100%" }}
+          >
+            <CinzelRegular size="20">Enter a new bonus action</CinzelRegular>
+          </AddBonusActionButton>
+          <FinishedButton
+            onPress={() => {
+              dispatch(updateBonusAction(localBonusAction));
+              navigate("MainCombatAction");
+            }}
+          />
+        </View>
+      </ActionContainer>
+    </ParchmentBackground>
   );
 };
 

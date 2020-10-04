@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CinzelRegular, CinzelBold, LatoLight } from "../components/styledComponents/FontComponents";
 import { FinishedButton } from "../components/FinishedButton";
 import { updateCharacter } from "../store/actions/characterActions";
+import { updateBonusAction } from "../store/actions/combatTurn";
 import { CharacterValues, storeCharacter } from "./ProfileScreen";
 import { ParchmentBackground } from "../components/styledComponents/ParchmentBackground";
 
@@ -41,6 +42,7 @@ export const InputBonusActionsScreen: React.FC = (props) => {
   const [characterToStore, setCharacterToStore] = useState<CharacterValues>(
     useSelector((state) => state.characterReducer)
   );
+  const selectedBonusAction = useSelector((state) => state.actionReducer.selectedBonusAction);
 
   return (
     <ParchmentBackground>
@@ -58,11 +60,14 @@ export const InputBonusActionsScreen: React.FC = (props) => {
                         color={darkRed}
                         onPress={() => {
                           const tempBonusActions = [...characterToStore.bonusActions];
-                          tempBonusActions.splice(index, 1);
+                          const deletedAction = tempBonusActions.splice(index, 1);
                           setCharacterToStore({
                             ...characterToStore,
                             bonusActions: [...tempBonusActions],
                           });
+                          if (deletedAction[0].title === selectedBonusAction) {
+                            dispatch(updateBonusAction(""));
+                          }
                         }}
                       >
                         X
