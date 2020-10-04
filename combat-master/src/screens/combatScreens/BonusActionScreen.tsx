@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Button, Text, TextInput } from "react-native";
-import styled from "styled-components";
+import { View } from "react-native";
 import { updateBonusAction } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { CharacterValues } from "..";
@@ -8,7 +7,8 @@ import { FinishedButton } from "../../components/FinishedButton";
 import { AddBonusActionButton } from "../../components/AddBonusActionButton";
 import { CinzelRegular, LatoLight } from "../../components/styledComponents/FontComponents";
 import { ActionSelector } from "../../components/ActionSelector";
-import { ActionDescription } from "./ActionScreen";
+import { ActionDescription, ActionContainer } from "./ActionScreen";
+import { ParchmentBackground } from "../../components/styledComponents/ParchmentBackground";
 
 interface BonusActionScreenProps {}
 
@@ -26,40 +26,47 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   }, [actions.selectedBonusAction]);
 
   return (
-    <View>
-      {character.bonusActions &&
-        character.bonusActions.map((action, index) => {
-          const isCurrentlySelectedAction = action.title === localBonusAction;
-          return (
-            <ActionSelector
-              bodyText={action.description}
-              isCurrentlySelectedAction={isCurrentlySelectedAction}
-              updateParentState={updateLocalBonusAction}
-              label={action.title}
-              key={index}
-            />
-          );
-        })}
-      <ActionDescription>
-        <LatoLight size="14px">
-          {character.bonusActions.filter((bonusAction) => bonusAction.title === localBonusAction)[0]?.description}
+    <ParchmentBackground style={{ flex: 1 }}>
+      <ActionContainer>
+        <LatoLight size="14" style={{ marginBottom: 20 }}>
+          {bonusActionDescription}
         </LatoLight>
-      </ActionDescription>
-      <AddBonusActionButton
-        onPress={() => {
-          navigate("InputBonusActionsScreen");
-        }}
-        style={{ alignSelf: "center", marginBottom: 20, width: "100%" }}
-      >
-        <CinzelRegular size="20">Enter a new bonus action</CinzelRegular>
-      </AddBonusActionButton>
-      <FinishedButton
-        onPress={() => {
-          dispatch(updateBonusAction(localBonusAction));
-          navigate("MainCombatAction");
-        }}
-      />
-    </View>
+        <View style={{ flex: 3, justifyContent: "space-between" }}>
+          {character.bonusActions &&
+            character.bonusActions.map((action, index) => {
+              const isCurrentlySelectedAction = action.title === localBonusAction;
+              return (
+                <ActionSelector
+                  bodyText={action.description}
+                  isCurrentlySelectedAction={isCurrentlySelectedAction}
+                  updateParentState={updateLocalBonusAction}
+                  label={action.title}
+                  key={index}
+                />
+              );
+            })}
+          <ActionDescription>
+            <LatoLight size="14px">
+              {character.bonusActions.filter((bonusAction) => bonusAction.title === localBonusAction)[0]?.description}
+            </LatoLight>
+          </ActionDescription>
+          <AddBonusActionButton
+            onPress={() => {
+              navigate("InputBonusActionsScreen");
+            }}
+            style={{ alignSelf: "center", marginVertical: 20, width: "100%" }}
+          >
+            <CinzelRegular size="20">Enter a new bonus action</CinzelRegular>
+          </AddBonusActionButton>
+          <FinishedButton
+            onPress={() => {
+              dispatch(updateBonusAction(localBonusAction));
+              navigate("MainCombatAction");
+            }}
+          />
+        </View>
+      </ActionContainer>
+    </ParchmentBackground>
   );
 };
 
