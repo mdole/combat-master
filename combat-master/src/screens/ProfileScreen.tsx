@@ -10,21 +10,11 @@ import RNPickerSelect from "react-native-picker-select";
 import { StyledInput } from "../components/styledComponents/StyledInput";
 import { BonusAction } from ".";
 import { ParchmentBackground } from "../components/styledComponents/ParchmentBackground";
-import { lightBlue } from "../styles/colors";
+import { AddBonusActionButton } from "../components/AddBonusActionButton";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
 }
-
-const AddBonusActionButton = styled.TouchableOpacity`
-  background: ${lightBlue};
-  border: 1px solid #000000;
-  border-radius: 2px;
-  width: 170px;
-  height: 50px;
-  align-items: center;
-  justify-content: center;
-`;
 
 type InternalProfileScreenProps = ProfileScreenProps;
 

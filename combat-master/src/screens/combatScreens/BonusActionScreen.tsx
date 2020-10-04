@@ -4,12 +4,12 @@ import styled from "styled-components";
 import { updateBonusAction } from "../../store/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { CharacterValues } from "..";
+import { FinishedButton } from "../../components/FinishedButton";
+import { AddBonusActionButton } from "../../components/AddBonusActionButton";
+import { CinzelRegular } from "../../components/styledComponents/FontComponents";
 
 interface BonusActionScreenProps {}
 
-const StyledTextInput = styled(TextInput)`
-  border: 1px black;
-`;
 export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   const { navigate } = props.navigation;
   const state = useSelector((state) => state);
@@ -21,30 +21,22 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
 
   return (
     <View>
-      <Text>{bonusActionDescription}</Text>
-
-      <StyledTextInput
-        placeholder="Input a bonus action you plan to take"
-        clearTextOnFocus={true}
-        onChangeText={(text) => updateLocalBonusAction(text)}
-      >
-        {actions.selectedBonusAction}
-      </StyledTextInput>
       {character.bonusActions &&
         character.bonusActions.map((action, index) => {
           return <Text key={index}>{action.title}</Text>;
         })}
-      <Button
-        title="Confirm bonus action"
+      <AddBonusActionButton
+        onPress={() => {
+          navigate("InputBonusActionsScreen");
+        }}
+        style={{ alignSelf: "center", marginBottom: 20, width: "100%" }}
+      >
+        <CinzelRegular size="20">Enter a new bonus action</CinzelRegular>
+      </AddBonusActionButton>
+      <FinishedButton
         onPress={() => {
           dispatch(updateBonusAction(localBonusAction));
           navigate("MainCombatAction");
-        }}
-      />
-      <Button
-        title="Enter a new bonus action"
-        onPress={() => {
-          navigate("InputBonusActionsScreen");
         }}
       />
     </View>
