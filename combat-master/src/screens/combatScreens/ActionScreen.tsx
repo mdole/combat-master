@@ -8,14 +8,12 @@ import styled from "styled-components/native";
 import { FinishedButton } from "../../components/FinishedButton";
 import { LatoLight } from "../../components/styledComponents/FontComponents";
 import { ParchmentBackground } from "../../components/styledComponents/ParchmentBackground";
-import { parchment } from "../../styles/colors";
 
 interface ActionScreenProps {}
 
 export const ActionDescription = styled.ScrollView`
   border: solid 1px #000;
   padding: 5px;
-  margin-top: 10;
   background-color: white;
   height: 200px;
 `;
@@ -50,6 +48,9 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
             );
           })}
         </View>
+        <LatoLight size="14" style={{ marginVertical: 10, alignSelf: "flex-start" }}>
+          Selected action description
+        </LatoLight>
         <ActionDescription>
           <LatoLight size="14px">
             {actions.filter((action) => action.label === locallySelectedAction)[0].bodyText}

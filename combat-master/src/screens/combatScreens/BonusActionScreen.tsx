@@ -17,6 +17,7 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   const state = useSelector((state) => state);
   const actions = state.actionReducer;
   const character: CharacterValues = state.characterReducer;
+  const noSelectedActionLabel = "No Bonus Action";
 
   const [localBonusAction, updateLocalBonusAction] = React.useState(actions.selectedBonusAction);
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
   return (
     <ParchmentBackground style={{ flex: 1 }}>
       <ActionContainer>
-        <LatoLight size="14" style={{ marginBottom: 20 }}>
+        <LatoLight size="18" style={{ marginBottom: 20 }}>
           {bonusActionDescription}
         </LatoLight>
         <View style={{ flex: 3, justifyContent: "space-between" }}>
@@ -45,11 +46,28 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
                 />
               );
             })}
-          <ActionDescription>
-            <LatoLight size="14px">
-              {character.bonusActions.filter((bonusAction) => bonusAction.title === localBonusAction)[0]?.description}
-            </LatoLight>
-          </ActionDescription>
+          {character.bonusActions.length !== 0 && (
+            <ActionSelector
+              label={noSelectedActionLabel}
+              isCurrentlySelectedAction={noSelectedActionLabel === localBonusAction}
+              updateParentState={updateLocalBonusAction}
+            />
+          )}
+          {character.bonusActions.length !== 0 && (
+            <>
+              <LatoLight size="14" style={{ marginVertical: 10, alignSelf: "flex-start" }}>
+                Selected action description
+              </LatoLight>
+              <ActionDescription>
+                <LatoLight size="14px">
+                  {
+                    character.bonusActions.filter((bonusAction) => bonusAction.title === localBonusAction)[0]
+                      ?.description
+                  }
+                </LatoLight>
+              </ActionDescription>
+            </>
+          )}
           <AddBonusActionButton
             onPress={() => {
               navigate("InputBonusActionsScreen");

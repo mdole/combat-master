@@ -48,6 +48,9 @@ export const InputBonusActionsScreen: React.FC = (props) => {
     <ParchmentBackground>
       <View style={{ width: "100%", height: "100%" }}>
         <View style={{ margin: 10, height: "100%" }}>
+          <LatoLight size="14" style={{ marginBottom: 10, alignSelf: "flex-start" }}>
+            Saved bonus actions
+          </LatoLight>
           <BonusActionList>
             {characterToStore.bonusActions &&
               characterToStore.bonusActions.map((action, index) => {
