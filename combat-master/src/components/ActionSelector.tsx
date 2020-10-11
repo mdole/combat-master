@@ -5,7 +5,7 @@ import { CinzelRegular } from "./styledComponents/FontComponents";
 
 export interface ActionSelectorProps {
   label: string;
-  bodyText: string;
+  bodyText?: string;
   isCurrentlySelectedAction: boolean;
   updateParentState: { (valueToUpdate: React.SetStateAction<string>): void };
 }
