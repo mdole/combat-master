@@ -138,12 +138,16 @@ export const InputBonusActionsScreen: React.FC = (props) => {
           />
           <AddButton
             onPress={() => {
-              setCharacterToStore({
-                ...characterToStore,
-                bonusActions: [...characterToStore.bonusActions, { title: actionInput, description: descriptionInput }],
-              });
-              setActionInput("");
-              setDescriptionInput("");
+              if (!!actionInput) {
+                setCharacterToStore({
+                  ...characterToStore,
+                  bonusActions: [...characterToStore.bonusActions, { title: actionInput, description: descriptionInput }],
+                });
+                setActionInput("");
+                setDescriptionInput("");
+              } else {
+                Alert.alert("", "Please enter an action name")
+              }
             }}
             style={{ alignSelf: "center", marginBottom: 20 }}
           >
