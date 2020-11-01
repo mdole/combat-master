@@ -32,23 +32,24 @@ const BonusActionList = styled.ScrollView`
   width: 100%;
   padding: 10px;
   background-color: white;
+  border-radius: 2px;
 `;
 
 export const InputBonusActionsScreen: React.FC = (props) => {
-  const { navigation } = props
+  const { navigation } = props;
   const dispatch = useDispatch();
 
-  const originalCharacter: CharacterValues = useSelector((state) => state.characterReducer)
+  const originalCharacter: CharacterValues = useSelector((state) => state.characterReducer);
   const [actionInput, setActionInput] = useState("");
   const [descriptionInput, setDescriptionInput] = useState("");
   const [characterToStore, setCharacterToStore] = useState<CharacterValues>(originalCharacter);
   const selectedBonusAction = useSelector((state) => state.actionReducer.selectedBonusAction);
 
-  const hasUnsavedChanges = characterToStore.bonusActions !== originalCharacter.bonusActions
+  const hasUnsavedChanges = characterToStore.bonusActions !== originalCharacter.bonusActions;
 
   React.useEffect(
     () =>
-      navigation.addListener('beforeRemove', (e) => {
+      navigation.addListener("beforeRemove", (e) => {
         // If we don't have unsaved changes, then we don't need to do anything
         // We only want to trigger this alert when using the header back arrow,
         // which has type POP, while the save & return uses GO_BACK
@@ -61,13 +62,13 @@ export const InputBonusActionsScreen: React.FC = (props) => {
 
         // Prompt the user before leaving the screen
         Alert.alert(
-          'Discard changes?',
-          'You have unsaved changes. Are you sure to discard them and leave the screen?',
+          "Discard changes?",
+          "You have unsaved changes. Are you sure to discard them and leave the screen?",
           [
-            { text: "Don't leave", style: 'cancel', onPress: () => {} },
+            { text: "Don't leave", style: "cancel", onPress: () => {} },
             {
-              text: 'Discard',
-              style: 'destructive',
+              text: "Discard",
+              style: "destructive",
               // If the user confirmed, then we dispatch the action we blocked earlier
               // This will continue the action that had triggered the removal of the screen
               onPress: () => navigation.dispatch(e.data.action),
@@ -141,12 +142,15 @@ export const InputBonusActionsScreen: React.FC = (props) => {
               if (!!actionInput) {
                 setCharacterToStore({
                   ...characterToStore,
-                  bonusActions: [...characterToStore.bonusActions, { title: actionInput, description: descriptionInput }],
+                  bonusActions: [
+                    ...characterToStore.bonusActions,
+                    { title: actionInput, description: descriptionInput },
+                  ],
                 });
                 setActionInput("");
                 setDescriptionInput("");
               } else {
-                Alert.alert("", "Please enter an action name")
+                Alert.alert("", "Please enter an action name");
               }
             }}
             style={{ alignSelf: "center", marginBottom: 20 }}
