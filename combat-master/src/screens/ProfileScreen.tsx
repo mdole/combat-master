@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AsyncStorage, StyleSheet, ScrollView } from "react-native";
+import { AsyncStorage, StyleSheet, View } from "react-native";
 import { Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCharacter } from "../store/actions/characterActions";
@@ -9,8 +9,8 @@ import { FinishedButton } from "../components/FinishedButton";
 import RNPickerSelect from "react-native-picker-select";
 import { StyledInput } from "../components/styledComponents/StyledInput";
 import { BonusAction } from ".";
-import { ParchmentBackground } from "../components/styledComponents/ParchmentBackground";
 import { AddBonusActionButton } from "../components/AddBonusActionButton";
+import { parchment } from "../styles/colors";
 
 export interface ProfileScreenProps {
   currentCharacterValues: CharacterValues;
@@ -55,12 +55,18 @@ export const getCharacterOrPlaceholder = async (
 };
 
 const FormContainer = styled.View`
-  width: 90%;
-  margin-top: 20px;
+  width: 100%;
+  flex: 1;
+  justify-content: flex-start;
 `;
 
 const Label = styled(LatoLight)`
-  margin-bottom: 5%;
+  margin-bottom: 10px;
+`;
+
+const ProfileContainer = styled.ScrollView`
+  flex: 1;
+  background-color: ${parchment};
 `;
 
 export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
@@ -115,10 +121,10 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
   };
 
   return (
-    <ScrollView>
+    <ProfileContainer contentContainerStyle={{ flexGrow: 1, margin: 10 }}>
       <Formik initialValues={currentCharacter} onSubmit={submit} enableReinitialize>
         {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <ParchmentBackground style={{ alignItems: "center" }}>
+          <View style={{ flex: 1, justifyContent: "space-between", alignItems: "center" }}>
             <FormContainer>
               <Label size={"20"}>Character Name:</Label>
               <StyledInput
@@ -158,25 +164,27 @@ export const ProfileScreen: React.FC<InternalProfileScreenProps> = (props) => {
                   return { label: className, value: className };
                 })}
               />
+            </FormContainer>
+            <View style={{ alignItems: "center", width: "100%", flex: 5 }}>
               <AddBonusActionButton
                 onPress={() => {
                   navigate("InputBonusActionsScreen");
                 }}
-                style={{ alignSelf: "center", marginBottom: 20, width: "100%" }}
+                style={{ width: "100%" }}
               >
                 <CinzelRegular size="20">Input bonus actions</CinzelRegular>
               </AddBonusActionButton>
-            </FormContainer>
+            </View>
             <FinishedButton
               text="Save & return"
               onPress={() => {
                 handleSubmit(values);
               }}
             />
-          </ParchmentBackground>
+          </View>
         )}
       </Formik>
-    </ScrollView>
+    </ProfileContainer>
   );
 };
 
@@ -187,6 +195,7 @@ const pickerSelectStyles = StyleSheet.create({
     textAlign: "center",
     borderColor: "black",
     borderWidth: 1,
+    borderRadius: 2,
     padding: 20,
     marginBottom: 20,
     fontSize: 20,
@@ -198,6 +207,7 @@ const pickerSelectStyles = StyleSheet.create({
     textAlign: "center",
     borderColor: "black",
     borderWidth: 1,
+    borderRadius: 2,
     padding: 20,
     marginBottom: 20,
     fontSize: 20,

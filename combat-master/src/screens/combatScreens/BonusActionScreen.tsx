@@ -7,8 +7,9 @@ import { FinishedButton } from "../../components/FinishedButton";
 import { AddBonusActionButton } from "../../components/AddBonusActionButton";
 import { CinzelRegular, LatoLight } from "../../components/styledComponents/FontComponents";
 import { ActionSelector } from "../../components/ActionSelector";
-import { ActionDescription, ActionContainer } from "./ActionScreen";
 import { ParchmentBackground } from "../../components/styledComponents/ParchmentBackground";
+import { ActionContainer } from "../../components/styledComponents/ActionContainer";
+import { ActionDescription } from "../../components/styledComponents/ActionDescription";
 
 interface BonusActionScreenProps {}
 

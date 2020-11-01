@@ -5,6 +5,7 @@ import { updateSelectedMoves, clearMoves, undoLastMove } from "../store/actions"
 import styled from "styled-components/native";
 import { CinzelRegular, LatoLight } from "./styledComponents/FontComponents";
 import { parchment, lightBlue, paleGreen } from "../styles/colors";
+import { Spacer } from "./styledComponents/Spacer";
 
 interface MoveCounterProps {
   movementInFeet: number;
@@ -15,7 +16,7 @@ const MovementButton = styled.TouchableOpacity<{ color?: string }>`
   background: ${(props) => (props.color ? props.color : "#fff")};
   border: 1px solid #000000;
   border-radius: 2px;
-  width: 170px;
+  flex: 1;
   height: 50px;
   align-items: center;
   justify-content: center;
@@ -24,15 +25,19 @@ const MovementButton = styled.TouchableOpacity<{ color?: string }>`
 const ButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
+  margin: 10px;
 `;
 
 const MovementLog = styled.View`
-  background: ${parchment};
   align-items: center;
-  margin: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
   padding: 20px;
-  height: 75%;
+  flex: 1;
   overflow: hidden;
+  background-color: white;
+  border: solid 1px #000;
+  border-radius: 2px;
 `;
 
 export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
@@ -64,11 +69,12 @@ export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
   }, [state.selectedMoves]);
 
   return (
-    <View>
+    <View style={{ flex: 10 }}>
       <ButtonContainer>
         <MovementButton color={lightBlue} onPress={() => dispatch(updateSelectedMoves("diagonal"))}>
           <CinzelRegular size="20">Diagonal</CinzelRegular>
         </MovementButton>
+        <Spacer />
         <MovementButton color={paleGreen} onPress={() => dispatch(updateSelectedMoves("orthogonal"))}>
           <CinzelRegular size="20">Orthogonal</CinzelRegular>
         </MovementButton>
@@ -98,6 +104,7 @@ export const MoveCounter: React.FC<MoveCounterProps> = (props) => {
         >
           <CinzelRegular size="20">Undo</CinzelRegular>
         </MovementButton>
+        <Spacer />
         <MovementButton
           onPress={() => {
             dispatch(clearMoves());

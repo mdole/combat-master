@@ -8,22 +8,10 @@ import styled from "styled-components/native";
 import { FinishedButton } from "../../components/FinishedButton";
 import { LatoLight } from "../../components/styledComponents/FontComponents";
 import { ParchmentBackground } from "../../components/styledComponents/ParchmentBackground";
+import { ActionDescription } from "../../components/styledComponents/ActionDescription";
+import { ActionContainer } from "../../components/styledComponents/ActionContainer";
 
 interface ActionScreenProps {}
-
-export const ActionDescription = styled.ScrollView`
-  border: solid 1px #000;
-  padding: 5px;
-  background-color: white;
-  height: 200px;
-`;
-
-export const ActionContainer = styled.ScrollView`
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
-  flex: 1;
-`;
 
 export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
   const { navigate } = props.navigation;

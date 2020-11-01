@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { MoveCounter } from "../../components/MoveCounter";
 import { updateSelectedMovement } from "../../store/actions";
 import { FinishedButton } from "../../components/FinishedButton";
+import { parchment } from "../../styles/colors";
 
 interface MoveScreenProps {}
 
@@ -14,7 +15,14 @@ export const MoveScreen: React.FC<MoveScreenProps> = (props) => {
   const [movementInFeet, updateMovementInFeet] = useState(state.selectedMovement);
 
   return (
-    <View>
+    <View
+      style={{
+        flexGrow: 1,
+        justifyContent: "space-between",
+        flexDirection: "column",
+        backgroundColor: `${parchment}`,
+      }}
+    >
       <MoveCounter movementInFeet={movementInFeet} updateMovementInFeet={updateMovementInFeet} />
       <FinishedButton
         onPress={() => {
