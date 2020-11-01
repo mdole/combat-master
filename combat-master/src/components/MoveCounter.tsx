@@ -5,15 +5,12 @@ import { updateSelectedMoves, clearMoves, undoLastMove } from "../store/actions"
 import styled from "styled-components/native";
 import { CinzelRegular, LatoLight } from "./styledComponents/FontComponents";
 import { parchment, lightBlue, paleGreen } from "../styles/colors";
+import { Spacer } from "./styledComponents/Spacer";
 
 interface MoveCounterProps {
   movementInFeet: number;
   updateMovementInFeet: any;
 }
-
-const Spacer = styled.View`
-  width: 10px;
-`;
 
 const MovementButton = styled.TouchableOpacity<{ color?: string }>`
   background: ${(props) => (props.color ? props.color : "#fff")};

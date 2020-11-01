@@ -13,8 +13,8 @@ const LargeButton = styled.TouchableOpacity`
   flex: 1;
   color: black;
   background-color: ${parchment};
-  margin: 5%;
-  margin-bottom: 0%;
+  /* margin: 5%;
+  margin-bottom: 0%; */
   align-items: center;
   justify-content: center;
 `;
