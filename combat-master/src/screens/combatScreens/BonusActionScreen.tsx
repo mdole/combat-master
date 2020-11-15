@@ -47,14 +47,14 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
                 />
               );
             })}
-          {character.bonusActions.length !== 0 && (
+          {character?.bonusActions?.length !== 0 && (
             <ActionSelector
               label={noSelectedActionLabel}
               isCurrentlySelectedAction={noSelectedActionLabel === localBonusAction}
               updateParentState={updateLocalBonusAction}
             />
           )}
-          {character.bonusActions.length !== 0 && (
+          {character?.bonusActions?.length !== 0 && (
             <>
               <LatoLight size="14" style={{ marginVertical: 10, alignSelf: "flex-start" }}>
                 Selected action description
@@ -62,7 +62,7 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
               <ActionDescription>
                 <LatoLight size="14px">
                   {
-                    character.bonusActions.filter((bonusAction) => bonusAction.title === localBonusAction)[0]
+                    character?.bonusActions?.filter((bonusAction) => bonusAction.title === localBonusAction)[0]
                       ?.description
                   }
                 </LatoLight>
