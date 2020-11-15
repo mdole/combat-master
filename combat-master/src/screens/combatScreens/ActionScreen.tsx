@@ -44,7 +44,7 @@ export const ActionScreen: React.FC<ActionScreenProps> = (props) => {
             {actions.filter((action) => action.label === locallySelectedAction)[0].bodyText}
           </LatoLight>
         </ActionDescription>
-        <View style={{ marginTop: 10, flex: 1 }}>
+        <View style={{ marginTop: 20, marginBottom: 30, flex: 1 }}>
           <FinishedButton
             onPress={() => {
               dispatch(updateSelectedAction(locallySelectedAction));

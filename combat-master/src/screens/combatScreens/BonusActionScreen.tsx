@@ -77,12 +77,14 @@ export const BonusActionScreen: React.FC<BonusActionScreenProps> = (props) => {
           >
             <CinzelRegular size="20">Enter a new bonus action</CinzelRegular>
           </AddBonusActionButton>
-          <FinishedButton
-            onPress={() => {
-              dispatch(updateBonusAction(localBonusAction));
-              navigate("MainCombatAction");
-            }}
-          />
+          <View style={{ marginBottom: 30 }}>
+            <FinishedButton
+              onPress={() => {
+                dispatch(updateBonusAction(localBonusAction));
+                navigate("MainCombatAction");
+              }}
+            />
+          </View>
         </View>
       </ActionContainer>
     </ParchmentBackground>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Image, View } from "react-native";
 import {
   ActionScreen,
   BonusActionScreen,
@@ -10,6 +11,15 @@ import {
 } from "../screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { parchment } from "../styles/colors";
+import Svg, { Path } from "react-native-svg";
+
+export const ArrowIcon = () => {
+  return (
+    <Svg width="50px" height="50px" viewBox="0 0 512 640" style={{ marginTop: 10 }}>
+      <Path d="M448 256l64 64h-48l-64-64 64-64h48.563zm.563-64H400l-48 48H127.438v-80l-128 96 128 96v-80H352l48 48h48l-64-64z" />
+    </Svg>
+  );
+};
 
 export const ScreenStack = () => {
   const Stack = createStackNavigator();
@@ -22,6 +32,9 @@ export const ScreenStack = () => {
         headerStyle: { backgroundColor: parchment },
         headerTitleStyle: { fontFamily: "Lato_300Light" },
         headerBackTitleVisible: false,
+        headerBackImage: () => {
+          return <ArrowIcon />;
+        },
       }}
     >
       <Stack.Screen name="Action" component={ActionScreen} options={{ title: "Action" }} />
