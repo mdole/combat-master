@@ -16,6 +16,7 @@ import Svg, { Path } from "react-native-svg";
 export const ArrowIcon = () => {
   return (
     <Svg width="50px" height="50px" viewBox="0 0 512 640" style={{ marginTop: 10 }}>
+      {/* Arrow by Icon Solid from the Noun Project thenounproject.com */}
       <Path d="M448 256l64 64h-48l-64-64 64-64h48.563zm.563-64H400l-48 48H127.438v-80l-128 96 128 96v-80H352l48 48h48l-64-64z" />
     </Svg>
   );
