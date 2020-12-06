@@ -33,7 +33,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = (props) => {
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
       <ImageBackground
-        source={require("../../../assets/splash.jpg")}
+        source={require("../../../assets/splash.png")}
         style={{ flex: 1, width: "100%", height: "100%", position: "absolute" }}
       />
       <View

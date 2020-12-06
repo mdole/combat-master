@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Combat Master",
-    "slug": "combat-master",
+    "name": "Roll Initative!",
+    "slug": "roll-initiative",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -12,7 +12,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.jpg",
+      "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -24,6 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.combatmaster.rollinitiative",
+      "versionCode": 1
     }
   }
 }
