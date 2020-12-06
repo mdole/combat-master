@@ -23,6 +23,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.combatmaster.rollinitiative",
       "supportsTablet": true
     },
     "android": {
